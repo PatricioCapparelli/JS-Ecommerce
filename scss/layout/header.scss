@@ -1,0 +1,44 @@
+header{
+    background-image: url(/assets/images/header.jpg);
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    grid-area: header;
+    align-content: center;
+    h1{
+        font-size: 30px;
+        font-family: "Playwrite FR Moderne", cursive;
+        font-optical-sizing: auto;
+        font-weight: weight;
+        font-style: normal;
+    }
+    h2{
+        font-family: "Playwrite FR Moderne", cursive;
+        font-optical-sizing: auto;
+        font-weight: weight;
+        font-style: normal;
+        font-size: 16px;
+        color: yellow;
+    }
+    & .head__container{
+        max-width: 1529px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
+        height: auto;
+        
+    }
+    .head__container-img{
+        background-position: center;
+        width: 55px;
+        height: 55px;
+    }
+    .head__container-pr{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+}

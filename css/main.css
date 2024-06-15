@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+a, p, li, h1, h2, h3, h4, h5 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.block__section--titles {
+  font-size: 19px;
+}
+
+.lista ul {
+  display: flex;
+  padding-top: 6px;
+}
+.lista ul li a {
+  font-size: 16px;
+  padding: 10px;
+  color: rgb(112, 99, 99);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  font-family: "Playwrite FR Moderne", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+.lista ul li a:hover {
+  color: #3185FA;
+}
+
+section {
+  background-color: #E7E7E7;
+  grid-area: section;
+}
+
+.block__section {
+  display: flex;
+  gap: 140px;
+  margin-top: 30px;
+}
+
+.card-container-min {
+  background-color: white;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-align: center;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+}
+.card-container-min h2 {
+  font-size: 18px;
+}
+.card-container-min img {
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.card-container-min a {
+  color: black;
+  font-size: 20px;
+  padding-top: 8px;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+.card-container-min a:hover {
+  background-color: blue;
+  border-radius: 8px;
+  transition: ease-in-out 0.4s;
+}
+.card-container-min p {
+  font-size: 15px;
+}
+.card-container-min .card__celun1 {
+  height: auto;
+  padding: 0 30px;
+}
+.card-container-min .card__pcn1 {
+  height: auto;
+  padding: 0 30px;
+}
+
+.card-container-min:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  background-color: grey;
+  grid-area: footer;
+}
+
+body {
+  width: 100%;
+  max-width: 1600px;
+  height: auto;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 130px 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-template-areas: "header header header" "nav section section" "nav section section" "nav section section" "footer footer footer";
+}
+
+.c-container {
+  margin-top: 30px;
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  grid-row-gap: 30px;
+  width: 100%;
+  transition: 0.3s;
+  grid-template-areas: "nav block" "nav block" "nav block";
+}
+
+header {
+  background-image: url(/assets/images/header.jpg);
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  grid-area: header;
+  align-content: center;
+}
+header h1 {
+  font-size: 30px;
+  font-family: "Playwrite FR Moderne", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+header h2 {
+  font-family: "Playwrite FR Moderne", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-size: 16px;
+  color: yellow;
+}
+header .head__container {
+  max-width: 1529px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  height: auto;
+}
+header .head__container-img {
+  background-position: center;
+  width: 55px;
+  height: 55px;
+}
+header .head__container-pr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+nav {
+  padding-top: 26px;
+  grid-area: nav;
+  background-color: #E7E7E7;
+}
+nav .nav__container {
+  height: 300px;
+  width: auto;
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 16px;
+  align-items: center;
+}
+nav .container-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+nav input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+@media (width >= 950px) {
+  nav {
+    content: none;
+  }
+}
+section {
+  background-color: #E7E7E7;
+  grid-area: section;
+}
+
+.block__section {
+  display: flex;
+  gap: 140px;
+  margin-top: 30px;
+}
+
+/*# sourceMappingURL=main.css.map */
