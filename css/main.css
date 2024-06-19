@@ -63,6 +63,7 @@ section {
 }
 .card-container-min h2 {
   font-size: 18px;
+  padding-top: 30px;
 }
 .card-container-min img {
   width: 100%;
@@ -87,13 +88,28 @@ section {
 .card-container-min p {
   font-size: 15px;
 }
-.card-container-min .card__celun1 {
+
+.card__mon1 {
   height: auto;
-  padding: 0 30px;
+  padding: 20px;
 }
-.card-container-min .card__pcn1 {
+
+.card__mon1 h2 {
+  padding-top: 20px;
+}
+
+.card__pcn1 {
   height: auto;
-  padding: 0 30px;
+  padding: 0 60px;
+}
+
+.card__celun1 h2 {
+  padding-top: 30px;
+}
+
+.card__celun1 {
+  height: auto;
+  padding: 0 70px;
 }
 
 .card-container-min:hover {
@@ -177,7 +193,7 @@ nav {
   background-color: #E7E7E7;
 }
 nav .nav__container {
-  height: 300px;
+  height: 400px;
   width: auto;
   background-color: #F5F5F5;
   display: flex;
@@ -186,15 +202,25 @@ nav .nav__container {
   border-radius: 16px;
   align-items: center;
 }
-nav .container-nav {
+nav form {
   display: flex;
   flex-direction: column;
   padding: 10px;
   gap: 10px;
+  background-color: #d8d8d8;
+  border-radius: 5px;
 }
 nav input {
   padding: 8px;
   font-size: 16px;
+}
+nav .nav__container-user {
+  padding: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 18px;
+}
+nav .inf_container {
+  font-weight: bold;
 }
 
 @media (width >= 950px) {

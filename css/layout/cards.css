@@ -13,6 +13,7 @@
 }
 .card-container-min h2 {
   font-size: 18px;
+  padding-top: 30px;
 }
 .card-container-min img {
   width: 100%;
@@ -37,13 +38,28 @@
 .card-container-min p {
   font-size: 15px;
 }
-.card-container-min .card__celun1 {
+
+.card__mon1 {
   height: auto;
-  padding: 0 30px;
+  padding: 20px;
 }
-.card-container-min .card__pcn1 {
+
+.card__mon1 h2 {
+  padding-top: 20px;
+}
+
+.card__pcn1 {
   height: auto;
-  padding: 0 30px;
+  padding: 0 60px;
+}
+
+.card__celun1 h2 {
+  padding-top: 30px;
+}
+
+.card__celun1 {
+  height: auto;
+  padding: 0 70px;
 }
 
 .card-container-min:hover {
