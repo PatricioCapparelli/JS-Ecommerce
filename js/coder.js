@@ -99,43 +99,51 @@ boton.addEventListener('click', () => {
 // Array con los datos de cada producto
 const productos = [
     {
+        imagen: "./assets/images/compun1.webp",
+        precio: "US$380",
+        nombre: "Notebook Exo Smart T38 Intel N4020 4gb Ssd128gb Windows 11 Color Gris"
+    },
+    {
         imagen: "./assets/images/ledn1.webp",
-        precio: "$277.999",
+        precio: "US$330",
         nombre: "Tv Smart Led Philips 32 Hd 32phd6918/77 Google Tv"
     },
     {
         imagen: "./assets/images/celun1.webp",
-        precio: "$249.999",
+        precio: "US$400",
         nombre: "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue"
     },
     {
         imagen: "./assets/images/zapan1.webp",
-        precio: "$35.992",
+        precio: "US$199",
         nombre: "Zapatillas Jaguar Oficial Deportiva Art. #9339 39al45"
     },
     {
         imagen: "./assets/images/jbl.webp",
-        precio: "$144.999",
+        precio: "US$90",
         nombre: "Parlante Jbl Flip 6 Portatil Bluetooth Color Negro"
     },
     {
         imagen: "./assets/images/pcn1.webp",
-        precio: "$475.199",
+        precio: "US$530",
         nombre: "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi"
     },
     {
         imagen: "./assets/images/taladron1.webp",
-        precio: "$88.754",
+        precio: "US$180",
         nombre: "Taladro Atornillador Percutor + 2 Baterias Gp By Lusqtoff"
     },
     {
         imagen: "./assets/images/monitorn1.webp",
-        precio: "$269.999",
+        precio: "US$220",
         nombre: "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo"
     }
 ];
 
-// Función para crear y agregar cada producto al contenedor
+// Variable global para almacenar los precios de los productos en el carrito
+let preciosCarrito = [];
+
+// Funcion para crear y agregar los productos
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
 
@@ -144,14 +152,13 @@ function agregarProductos() {
         const articulo = document.createElement('article');
         articulo.classList.add('card-container-min');
 
+        // Agregar clases adicionales según el producto (opcional)
         if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue") {
             articulo.classList.add('card__celun1'); 
         }
-
         if (producto.nombre === "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi") {
             articulo.classList.add('card__pcn1'); 
         }
-
         if (producto.nombre === "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo") {
             articulo.classList.add('card__mon1'); 
         }
@@ -168,23 +175,82 @@ function agregarProductos() {
         nombre.textContent = producto.nombre;
 
         const enlace = document.createElement('a');
-        enlace.href = "#"; // Puedes establecer un enlace adecuado si lo deseas
+        enlace.href = "#";
         enlace.textContent = "🛒";
+        enlace.addEventListener('click', () => agregarAlCarrito(producto));
 
-        // Agregar elementos al article
+        // Función para agregar producto al carrito
+        function agregarAlCarrito(producto) {
+            const carrito = document.getElementById('carrito');
+
+            // Crear elemento para el producto en el carrito
+            const productoCarrito = document.createElement('div');
+            productoCarrito.classList.add('article__producto--carrito');
+
+            const nombreProducto = document.createElement('p');
+            nombreProducto.textContent = producto.nombre;
+
+            const precioProducto = document.createElement('span');
+            precioProducto.textContent = producto.precio;
+
+            // Convertir precio a numero para sumar al carrito
+            const precioNumerico = parseFloat(producto.precio.replace('US$', '').replace(',', ''));
+            preciosCarrito.push(precioNumerico); // Agregar precio al array global
+
+            // Boton para eliminar el producto del carrito
+            const botonEliminar = document.createElement('button');
+            botonEliminar.className = "article__btn"
+            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.addEventListener('click', () => {
+                // Remover producto del DOM
+                carrito.removeChild(productoCarrito);
+                // Remover precio del producto del arreglo global
+                const index = preciosCarrito.indexOf(precioNumerico);
+                if (index !== -1) {
+                    preciosCarrito.splice(index, 1);
+                }
+                // Llamar a la función para recalcular el total
+                calcularTotal();
+            });
+
+            // Agregar elementos al contenedor del producto en el carrito
+            productoCarrito.appendChild(nombreProducto);
+            productoCarrito.appendChild(precioProducto);
+            productoCarrito.appendChild(botonEliminar);
+
+            // Agregar producto al carrito
+            carrito.appendChild(productoCarrito);
+
+            // Llamar a la función para recalcular el total
+            calcularTotal();
+        }
+
+        // Agregar elementos al artículo
         articulo.appendChild(imagen);
         articulo.appendChild(precio);
         articulo.appendChild(nombre);
         articulo.appendChild(enlace);
 
-        // Agregar article al contenedor de productos
+        // Agregar articulo al contenedor de productos
         contenedorProductos.appendChild(articulo);
     });
 }
 
-// Llamar a la función para agregar los productos al cargar la página
+// Funcion para calcular el total de los precios y mostrarlo.
+function calcularTotal() {
+    const total = preciosCarrito.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const totalElement = document.getElementById('total');
+    totalElement.textContent = `Total: US$${total.toFixed(2)}`;
+}
+
+// Llamar a la funcion para agregar los productos al cargar la pagina
 document.addEventListener('DOMContentLoaded', agregarProductos);
 
+// Evento para calcular el total al hacer clic en el boton "Comprar"
+const botonCalcularTotal = document.getElementById('calcularTotal');
+botonCalcularTotal.addEventListener('click', () => {
+    alert(`Total de la compra: US$${preciosCarrito.reduce((accumulator, currentValue) => accumulator + currentValue, 0).toFixed(2)}`);
+});
 
 
 

@@ -2,6 +2,10 @@ nav{
     padding-top: 26px;
     grid-area: nav;
     background-color: #E7E7E7;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 10px;
     .nav__container{
         height: 400px;
         width: auto;
@@ -11,8 +15,6 @@ nav{
         padding: 10px;
         border-radius: 16px;
         align-items: center;
-        
-        
     }
     form{
         display: flex;
@@ -33,6 +35,31 @@ nav{
     }
     .inf_container{
         font-weight: bold;
+    }
+    article{
+        height: auto;
+        width: auto;
+        background-color: #F5F5F5;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 16px;
+        align-items: center;
+        padding: 40px;
+    .carrito__compra-title{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    .carrito__compra--img{
+        height: 30px;
+    }
+    }
+    .article__producto--carrito{
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding-top: 10px;
+    }
     }
 }
 
