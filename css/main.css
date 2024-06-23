@@ -251,6 +251,18 @@ nav article .article__producto--carrito {
   gap: 18px;
   padding-top: 10px;
 }
+nav article .article__producto--carrito .img__producto {
+  height: 60px;
+  width: 60px;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+}
+nav article .article__producto--carrito .carrito__contenido {
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+}
 
 @media (width >= 950px) {
   nav {

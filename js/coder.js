@@ -78,23 +78,7 @@ boton.addEventListener('click', () => {
     }
 });
 
-// duplicacion de elementos del carrito
 
-
-    // function duplicarElemento() {
-    //     // Seleccionar el elemento original que queremos duplicar
-    //     const articuloOriginal = document.querySelector('.card-container-min');
-
-    //     // Crear una copia del elemento
-    //     const articuloCopia = articuloOriginal.cloneNode(true); // true para copiar también los elementos hijos
-
-    //     // Insertar la copia en el contenedor deseado (en este caso, en el div con id "productos")
-    //     const contenedorProductos = document.getElementById('productos');
-    //     contenedorProductos.appendChild(articuloCopia);
-    // }
-
-    // // Llamar a la función para duplicar el elemento al cargar la página o cuando sea necesario
-    // duplicarElemento();
 
 // Array con los datos de cada producto
 const productos = [
@@ -166,7 +150,7 @@ function agregarProductos() {
         // Crear elementos dentro de article
         const imagen = document.createElement('img');
         imagen.src = producto.imagen;
-        imagen.alt = "";
+        imagen.alt = "imagen del producto";
 
         const precio = document.createElement('h2');
         precio.textContent = producto.precio;
@@ -179,28 +163,42 @@ function agregarProductos() {
         enlace.textContent = "🛒";
         enlace.addEventListener('click', () => agregarAlCarrito(producto));
 
+        function reducirTexto(texto, longitudMaxima) {
+            if (texto.length > longitudMaxima) {
+                return texto.substring(0, longitudMaxima) + '...';
+            }
+            return texto;
+        }
+
         // Función para agregar producto al carrito
         function agregarAlCarrito(producto) {
             const carrito = document.getElementById('carrito');
-
+        
             // Crear elemento para el producto en el carrito
             const productoCarrito = document.createElement('div');
             productoCarrito.classList.add('article__producto--carrito');
-
-            const nombreProducto = document.createElement('p');
-            nombreProducto.textContent = producto.nombre;
-
-            const precioProducto = document.createElement('span');
-            precioProducto.textContent = producto.precio;
-
-            // Convertir precio a numero para sumar al carrito
+        
+            // Crear el contenido HTML del producto en el carrito
+            const contenidoHTML = `
+                <div class = "carrito__contenido">
+                <p>${reducirTexto(producto.nombre, 20)}</p>
+                <img class="img__producto" src="${producto.imagen}" alt="imagen del producto">
+                </div>
+                <div class = "carrito__contenido">
+                <span>${producto.precio}</span>
+                <button class="article__btn">Quitar</button>
+                </div>
+            `;
+        
+            // Establecer el contenido HTML creado dentro del div productoCarrito
+            productoCarrito.innerHTML = contenidoHTML;
+        
+            // Convertir precio a número para sumar al carrito
             const precioNumerico = parseFloat(producto.precio.replace('US$', '').replace(',', ''));
             preciosCarrito.push(precioNumerico); // Agregar precio al array global
-
-            // Boton para eliminar el producto del carrito
-            const botonEliminar = document.createElement('button');
-            botonEliminar.className = "article__btn"
-            botonEliminar.textContent = 'Eliminar';
+        
+            // Agregar evento para eliminar el producto del carrito
+            const botonEliminar = productoCarrito.querySelector('.article__btn');
             botonEliminar.addEventListener('click', () => {
                 // Remover producto del DOM
                 carrito.removeChild(productoCarrito);
@@ -212,16 +210,11 @@ function agregarProductos() {
                 // Llamar a la función para recalcular el total
                 calcularTotal();
             });
-
-            // Agregar elementos al contenedor del producto en el carrito
-            productoCarrito.appendChild(nombreProducto);
-            productoCarrito.appendChild(precioProducto);
-            productoCarrito.appendChild(botonEliminar);
-
+        
             // Agregar producto al carrito
             carrito.appendChild(productoCarrito);
-
-            // Llamar a la función para recalcular el total
+        
+        // Llamar a la función para recalcular el total
             calcularTotal();
         }
 

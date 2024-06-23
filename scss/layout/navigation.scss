@@ -59,6 +59,18 @@ nav{
         flex-direction: column;
         gap: 18px;
         padding-top: 10px;
+    .img__producto{
+        height: 60px;
+        width: 60px;
+        background-position: center;
+        background-size: cover;
+        object-fit: cover;
+    }
+    .carrito__contenido{
+        display: flex;
+        gap: 10px;
+        padding: 5px 0;
+    }
     }
     }
 }
