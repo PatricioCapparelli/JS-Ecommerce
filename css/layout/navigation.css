@@ -1,3 +1,4 @@
+@charset "UTF-8";
 nav {
   padding-top: 26px;
   grid-area: nav;
@@ -6,6 +7,7 @@ nav {
   flex-direction: column;
   justify-content: baseline;
   gap: 10px;
+  /* Estilos para los artículos de productos */
 }
 nav .nav__container {
   height: 400px;
@@ -40,45 +42,39 @@ nav .inf_container {
 nav article {
   height: auto;
   width: auto;
-  background-color: #F5F5F5;
+  background-color: white;
   display: flex;
   flex-direction: column;
   padding: 10px;
   border-radius: 16px;
   align-items: center;
-  padding: 40px;
+  gap: 20px;
 }
-nav article .carrito__compra-title {
+nav .carrito__compra-title {
   display: flex;
   gap: 5px;
   align-items: center;
 }
-nav article .carrito__compra-title .carrito__compra--img {
+nav .carrito__compra--img {
   height: 30px;
 }
-nav article .article__producto--carrito {
+nav .article__producto--carrito {
   display: flex;
   flex-direction: column;
   gap: 18px;
   padding-top: 10px;
 }
-nav article .article__producto--carrito .img__producto {
+nav .img__producto {
   height: 60px;
   width: 60px;
   background-position: center;
   background-size: cover;
   object-fit: cover;
 }
-nav article .article__producto--carrito .carrito__contenido {
+nav .carrito__contenido {
   display: flex;
   gap: 10px;
   padding: 5px 0;
-}
-
-@media (width >= 950px) {
-  nav {
-    content: none;
-  }
 }
 
 /*# sourceMappingURL=navigation.css.map */

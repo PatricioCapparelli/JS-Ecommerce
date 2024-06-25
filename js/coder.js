@@ -80,7 +80,6 @@ boton.addEventListener('click', () => {
 
 
 
-// Array con los datos de cada producto
 const productos = [
     {
         imagen: "./assets/images/compun1.webp",
@@ -124,10 +123,133 @@ const productos = [
     }
 ];
 
-// Variable global para almacenar los precios de los productos en el carrito
-let preciosCarrito = [];
+// Variable para mantener los productos en el carrito con su cantidad
+let productosEnCarrito = [];
 
-// Funcion para crear y agregar los productos
+function agregarAlCarrito(producto) {
+    // Verificar si el producto ya está en el carrito
+    const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
+
+    if (productoExistente) {
+        // Si el producto ya está en el carrito, incrementar la cantidad
+        productoExistente.cantidad++;
+    } else {
+        // Si el producto no está en el carrito, agregarlo con cantidad 1
+        productosEnCarrito.push({
+            producto: producto,
+            cantidad: 1
+        });
+    }
+
+    localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
+    
+    // Llamar a la función para actualizar la interfaz del carrito
+    actualizarCarrito();
+}
+
+function cargarCarritoDesdeLocalStorage() {
+    const carritoEnLocalStorage = localStorage.getItem('productosEnCarrito');
+    if (carritoEnLocalStorage) {
+        productosEnCarrito = JSON.parse(carritoEnLocalStorage);
+        actualizarCarrito();
+    }
+}
+
+function actualizarCarrito() {
+    const carrito = document.getElementById('carrito');
+    const totalElement = document.getElementById('total');
+    const botonComprar = document.getElementById('botonComprar');
+
+    // Variable para verificar si hay productos en el carrito
+    let hayProductosEnCarrito = false;
+
+    // Recorrer el array productosEnCarrito y agregar o actualizar cada producto en el carrito
+    productosEnCarrito.forEach(item => {
+        const producto = item.producto;
+        const cantidad = item.cantidad;
+
+        // Verificar si ya existe el elemento en el carrito
+        let productoExistente = carrito.querySelector(`[data-nombre="${producto.nombre}"]`);
+
+        if (productoExistente) {
+            // Actualizar la cantidad del producto existente
+            const cantidadElement = productoExistente.querySelector('.cantidad');
+            cantidadElement.textContent = `(${cantidad})`;
+        } else {
+            // Crear elemento para el nuevo producto en el carrito
+            const productoCarrito = document.createElement('div');
+            productoCarrito.classList.add('article__producto--carrito');
+            productoCarrito.setAttribute('data-nombre', producto.nombre);
+
+            // Crear el contenido HTML del producto en el carrito
+            const contenidoHTML = `
+                <div class="carrito__contenido">
+                    <p>${reducirTexto(producto.nombre, 20)} <span class="cantidad">(${cantidad})</span></p>
+                    <img class="img__producto" src="${producto.imagen}" alt="imagen del producto">
+                </div>
+                <div class="carrito__contenido">
+                    <span>${producto.precio}</span>
+                    <button class="article__btn">Quitar</button>
+                </div>
+            `;
+
+            // Establecer el contenido HTML creado dentro del div productoCarrito
+            productoCarrito.innerHTML = contenidoHTML;
+
+            // Agregar evento para eliminar el producto del carrito
+            const botonEliminar = productoCarrito.querySelector('.article__btn');
+            botonEliminar.addEventListener('click', () => {
+                // Encontrar el índice del producto en el array productosEnCarrito
+                const index = productosEnCarrito.findIndex(item => item.producto.nombre === producto.nombre);
+
+                // Reducir la cantidad del producto en el carrito
+                productosEnCarrito[index].cantidad--;
+
+                // Si la cantidad llega a cero, eliminar completamente el producto del carrito
+                if (productosEnCarrito[index].cantidad === 0) {
+                    carrito.removeChild(productoCarrito); // Eliminar el elemento del DOM
+                    productosEnCarrito.splice(index, 1); // Eliminar el producto del array productosEnCarrito
+                }
+
+                localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
+
+                // Llamar a la función para actualizar la interfaz del carrito
+                actualizarCarrito();
+            });
+
+            // Agregar producto al carrito
+            carrito.appendChild(productoCarrito);
+        }
+
+        // Actualizar la bandera si hay productos en el carrito
+        hayProductosEnCarrito = true;
+    });
+
+    // Mostrar el total siempre
+    calcularTotal();
+
+    // Mostrar siempre el botón de comprar si hay productos en el carrito
+    botonComprar.style.display = hayProductosEnCarrito ? 'flex' : 'none';
+
+    // Función para calcular el total de los precios y mostrarlo
+    function calcularTotal() {
+        const total = productosEnCarrito.reduce((accumulator, item) => {
+            const precioNumerico = parseFloat(item.producto.precio.replace('US$', '').replace(',', ''));
+            return accumulator + (precioNumerico * item.cantidad);
+        }, 0);
+        totalElement.textContent = `Total: US$${total.toFixed(2)}`;
+    }
+}
+
+// Función para reducir el texto si es necesario
+function reducirTexto(texto, longitudMaxima) {
+    if (texto.length > longitudMaxima) {
+        return texto.substring(0, longitudMaxima) + '...';
+    }
+    return texto;
+}
+
+// Función para agregar los productos al cargar la página
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
 
@@ -159,64 +281,9 @@ function agregarProductos() {
         nombre.textContent = producto.nombre;
 
         const enlace = document.createElement('a');
-        enlace.href = "#";
+        enlace.href = "#carrito";
         enlace.textContent = "🛒";
         enlace.addEventListener('click', () => agregarAlCarrito(producto));
-
-        function reducirTexto(texto, longitudMaxima) {
-            if (texto.length > longitudMaxima) {
-                return texto.substring(0, longitudMaxima) + '...';
-            }
-            return texto;
-        }
-
-        // Función para agregar producto al carrito
-        function agregarAlCarrito(producto) {
-            const carrito = document.getElementById('carrito');
-        
-            // Crear elemento para el producto en el carrito
-            const productoCarrito = document.createElement('div');
-            productoCarrito.classList.add('article__producto--carrito');
-        
-            // Crear el contenido HTML del producto en el carrito
-            const contenidoHTML = `
-                <div class = "carrito__contenido">
-                <p>${reducirTexto(producto.nombre, 20)}</p>
-                <img class="img__producto" src="${producto.imagen}" alt="imagen del producto">
-                </div>
-                <div class = "carrito__contenido">
-                <span>${producto.precio}</span>
-                <button class="article__btn">Quitar</button>
-                </div>
-            `;
-        
-            // Establecer el contenido HTML creado dentro del div productoCarrito
-            productoCarrito.innerHTML = contenidoHTML;
-        
-            // Convertir precio a número para sumar al carrito
-            const precioNumerico = parseFloat(producto.precio.replace('US$', '').replace(',', ''));
-            preciosCarrito.push(precioNumerico); // Agregar precio al array global
-        
-            // Agregar evento para eliminar el producto del carrito
-            const botonEliminar = productoCarrito.querySelector('.article__btn');
-            botonEliminar.addEventListener('click', () => {
-                // Remover producto del DOM
-                carrito.removeChild(productoCarrito);
-                // Remover precio del producto del arreglo global
-                const index = preciosCarrito.indexOf(precioNumerico);
-                if (index !== -1) {
-                    preciosCarrito.splice(index, 1);
-                }
-                // Llamar a la función para recalcular el total
-                calcularTotal();
-            });
-        
-            // Agregar producto al carrito
-            carrito.appendChild(productoCarrito);
-        
-        // Llamar a la función para recalcular el total
-            calcularTotal();
-        }
 
         // Agregar elementos al artículo
         articulo.appendChild(imagen);
@@ -227,132 +294,13 @@ function agregarProductos() {
         // Agregar articulo al contenedor de productos
         contenedorProductos.appendChild(articulo);
     });
+
+    // Llamar a la función para actualizar el carrito al cargar la página
+    actualizarCarrito();
+    cargarCarritoDesdeLocalStorage();
 }
 
-// Funcion para calcular el total de los precios y mostrarlo.
-function calcularTotal() {
-    const total = preciosCarrito.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    const totalElement = document.getElementById('total');
-    totalElement.textContent = `Total: US$${total.toFixed(2)}`;
-}
-
-// Llamar a la funcion para agregar los productos al cargar la pagina
-document.addEventListener('DOMContentLoaded', agregarProductos);
-
-// Evento para calcular el total al hacer clic en el boton "Comprar"
-const botonCalcularTotal = document.getElementById('calcularTotal');
-botonCalcularTotal.addEventListener('click', () => {
-    alert(`Total de la compra: US$${preciosCarrito.reduce((accumulator, currentValue) => accumulator + currentValue, 0).toFixed(2)}`);
-});
-
-
-
-
-// bucle 
-
-// let carrito = [];
-
-// let ropa;
-// while (ropa !== 'salir') {
-//     ropa = prompt('Ingrese la prenda que le interesa y le diremos su precio \n "remera" \n "pantalon" \n "zapatillas" \n "buzo" \n "gorra" \n para salir ingrese la palabra salir.');
-//     // opciones de ropa
-//     let precioPrenda;
-//     switch(ropa) {
-//         case 'remera':
-//             precioPrenda = prompt('la remera cuesta $9000 ¿deseas comprarla? si/no');
-//             if(precioPrenda.toLowerCase() === 'si'){
-//                 carrito.push(9000);
-//             }
-//             break;
-//         case 'pantalon':
-//             precioPrenda = prompt('el pantalon cuesta $40000 ¿deseas comprarlo? si/no');
-//             if(precioPrenda.toLowerCase() === 'si'){
-//                 carrito.push(40000);
-//             }
-//             break;
-//         case 'zapatillas':
-//             precioPrenda = prompt('las zapatillas cuestan $189000 ¿deseas comprarlas? si/no');
-//             if(precioPrenda.toLowerCase() === 'si'){
-//                 carrito.push(189000);
-//             }
-//             break;
-//         case 'buzo':
-//             precioPrenda = prompt('el buzo cuesta $50000 ¿deseas comprarlo? si/no');
-//             if(precioPrenda.toLowerCase() === 'si'){
-//                 carrito.push(50000);
-//             }
-//             break;
-//         case 'gorra':
-//             precioPrenda = prompt('la gorra cuesta $10000 ¿deseas comprarla? si/no');
-//             if(precioPrenda.toLowerCase() === 'si'){
-//                 carrito.push(10000);
-//             }
-//             break;
-//         // salida del bucle
-//         case 'salir':
-//             alert('Buena eleccion!');
-//             break;
-//         default:
-//             alert("No se encuentra disponible esa prenda.");
-//             continue; // volver al inicio del bucle si no es valido.
-//     }
-// }
-
-// console.log(carrito);
-// let totalProductos = carrito.length ; //cantidad de productos del (array) carrito asignada a una variable.
-// let precioTotal = carrito.reduce((total, precio) => total + precio, 0); // metodo para sumar todos los productos del carrito.
-// alert('Cantidad de productos: ' + totalProductos + '\nPrecio total: $' + precioTotal);
-
-// // calcular precio final
-
-// let calcIva = (value) => value * 0.21; // declarando una variable y asignandole una funcion flecha que calcula el iva.
-
-// function realizarCompra(precioTotal) { // creando funcion que calcule el precio total.
-//     let final = prompt('¿Desea realizar la compra? Le ofrecemos un descuento! Si/No');
-//     if (final.toLowerCase() === 'si') {
-//         function calcularPrecioFinal(precioBase, fn, descuentoPorcentaje) { // creando funcion para luego pasarle argumentos.
-//             if (isNaN(precioBase) || precioBase < 0) {
-//                 alert("Precio inválido");
-//                 return; // Detener la ejecución 
-//             }
-//            // Descuento
-//             const descuento = precioBase * (descuentoPorcentaje / 100);
-//             const precioConDescuento = precioBase - descuento;
-
-//             // Impuesto
-//             const precioConIva = fn(precioConDescuento); //calculando precio con funcion por parametro y asignandolo a la constante.
-
-//             // Precio final
-//             const precioFinal = precioConDescuento + precioConIva;
-
-//             // Return del precio final
-//             return precioFinal;
-// }
-        
-//         let descuentoPorcentaje = 20; // variable de descuento con valor asignado
-
-//         const precioFinalProducto = calcularPrecioFinal(precioTotal, calcIva, descuentoPorcentaje); // llamando a la funcion, pasandole los argumentos y asignando su return a la constante.
-
-//         // Resultado final
-//         if (precioFinalProducto !== undefined) {
-//             // Mostrar solo si el precio final es valido
-//             alert("Precio final del producto: " + precioFinalProducto + ' $');
-//             alert("¡Vuelva pronto! :D");
-//             console.log('su precio final por consola es: $'+ precioFinalProducto);
-//             fechaDeCompra();
-//         }
-//     } else {
-//         alert('Gracias por visitarnos, vuelva pronto!');
-//     }
-// }
-
-// // Llamando a la función para iniciar la compra pasando precioTotal como argumento.
-
-// realizarCompra(precioTotal);
-// function fechaDeCompra() {
-//     let tiempoActual = new Date(); //  llamando la clase 'Date' para ver la fecha y hora actual.
-//     let fechaHoraFormateada = tiempoActual.toLocaleDateString('es-ES'); // utilizando el metodo para mostrar en español.
-//     alert('Pago realizado el: ' + fechaHoraFormateada);
-// }
+// Llamar a la función para agregar los productos al cargar la página
+agregarProductos();
 
 
