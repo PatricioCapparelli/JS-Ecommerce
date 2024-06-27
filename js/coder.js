@@ -36,10 +36,21 @@ let user = document.querySelector('#user');
 let inf_container = null;
 
 function validarRegistro(e) {
-    e.preventDefault(); // Prevenir la accion por defecto de submit
+    e.preventDefault(); // Prevenir la acción por defecto de submit
 
     let nombreUsuario = document.getElementById('nombre').value.trim();
     let apellidoUsuario = document.getElementById('apellido').value.trim();
+
+    // Verificar si el usuario ya está registrado
+    if (usuarioRegistrado(nombreUsuario, apellidoUsuario)) {
+        inf_container = document.createElement('div');
+        inf_container.innerHTML = `
+            <p>Error: El usuario con nombre ${nombreUsuario} y apellido ${apellidoUsuario} ya está registrado ✖</p>
+        `;
+        user.appendChild(inf_container);
+        return;
+    }
+
     let edadUsuario = document.getElementById('edad').value.trim();
     let contraseñaUsuario = document.getElementById('contraseña').value; 
 
@@ -49,7 +60,10 @@ function validarRegistro(e) {
     let mensaje = usuario.validar();
 
     if (mensaje === true) {
-        // Limpiar contenido anterior
+        // Guardar en localStorage
+        guardarUsuarioLocalStorage(usuario);
+
+        // Limpiar contenido anterior del article
         user.innerHTML = '';
 
         // Mostrar mensaje de bienvenida
@@ -69,15 +83,39 @@ function validarRegistro(e) {
     }
 }
 
+// Función para verificar si el usuario ya está registrado
+function usuarioRegistrado(nombreUsuario, apellidoUsuario) {
+    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Buscar si hay algún usuario con el mismo nombre y apellido
+    return usuariosGuardados.some(usuario => usuario.nombreUsuario === nombreUsuario && usuario.apellidoUsuario === apellidoUsuario);
+}
+
+// Función para guardar usuario en localStorage
+function guardarUsuarioLocalStorage(usuario) {
+    // Obtener usuarios existentes del localStorage (si hay)
+    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Agregar el nuevo usuario
+    usuariosGuardados.push({
+        nombreUsuario: usuario.nombreUsuario,
+        apellidoUsuario: usuario.apellidoUsuario,
+        edadUsuario: usuario.edadUsuario,
+        // No es recomendable guardar la contraseña en localStorage por razones de seguridad
+    });
+
+    // Guardar en localStorage
+    localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+}
+
 form.addEventListener('submit', validarRegistro);
 
-// Limpiar contenido al hacer clic en el boton
+// Limpiar contenido al hacer clic en el botón
 boton.addEventListener('click', () => {
     if (inf_container) {
         inf_container.remove();
     }
 });
-
 
 
 const productos = [
@@ -123,15 +161,15 @@ const productos = [
     }
 ];
 
-// Variable para mantener los productos en el carrito con su cantidad
+// variable para mantener los productos en el carrito con su cantidad
 let productosEnCarrito = [];
 
 function agregarAlCarrito(producto) {
-    // Verificar si el producto ya está en el carrito
+    // verificar si el producto ya esta en el carrito
     const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
 
     if (productoExistente) {
-        // Si el producto ya está en el carrito, incrementar la cantidad
+        // Si el producto ya esta en el carrito incrementar la cantidad.
         productoExistente.cantidad++;
     } else {
         // Si el producto no está en el carrito, agregarlo con cantidad 1
@@ -143,7 +181,6 @@ function agregarAlCarrito(producto) {
 
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
     
-    // Llamar a la función para actualizar la interfaz del carrito
     actualizarCarrito();
 }
 
@@ -155,10 +192,12 @@ function cargarCarritoDesdeLocalStorage() {
     }
 }
 
+let botonComprar = document.getElementById('botonComprar');
+
 function actualizarCarrito() {
     const carrito = document.getElementById('carrito');
     const totalElement = document.getElementById('total');
-    const botonComprar = document.getElementById('botonComprar');
+    
 
     // Variable para verificar si hay productos en el carrito
     let hayProductosEnCarrito = false;
@@ -181,7 +220,7 @@ function actualizarCarrito() {
             productoCarrito.classList.add('article__producto--carrito');
             productoCarrito.setAttribute('data-nombre', producto.nombre);
 
-            // Crear el contenido HTML del producto en el carrito
+            // contenido HTML del producto en el carrito
             const contenidoHTML = `
                 <div class="carrito__contenido">
                     <p>${reducirTexto(producto.nombre, 20)} <span class="cantidad">(${cantidad})</span></p>
@@ -193,13 +232,13 @@ function actualizarCarrito() {
                 </div>
             `;
 
-            // Establecer el contenido HTML creado dentro del div productoCarrito
+            // asignando el contenido 
             productoCarrito.innerHTML = contenidoHTML;
 
             // Agregar evento para eliminar el producto del carrito
             const botonEliminar = productoCarrito.querySelector('.article__btn');
             botonEliminar.addEventListener('click', () => {
-                // Encontrar el índice del producto en el array productosEnCarrito
+                // Encontrar el indice del producto en el array
                 const index = productosEnCarrito.findIndex(item => item.producto.nombre === producto.nombre);
 
                 // Reducir la cantidad del producto en el carrito
@@ -208,12 +247,12 @@ function actualizarCarrito() {
                 // Si la cantidad llega a cero, eliminar completamente el producto del carrito
                 if (productosEnCarrito[index].cantidad === 0) {
                     carrito.removeChild(productoCarrito); // Eliminar el elemento del DOM
-                    productosEnCarrito.splice(index, 1); // Eliminar el producto del array productosEnCarrito
+                    productosEnCarrito.splice(index, 1); // Eliminar el producto del array
                 }
 
                 localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
 
-                // Llamar a la función para actualizar la interfaz del carrito
+                // Llamar a la funcion para actualizar la interfaz del carrito
                 actualizarCarrito();
             });
 
@@ -228,10 +267,10 @@ function actualizarCarrito() {
     // Mostrar el total siempre
     calcularTotal();
 
-    // Mostrar siempre el botón de comprar si hay productos en el carrito
+    // Mostrar siempre el boton de comprar si hay productos en el carrito
     botonComprar.style.display = hayProductosEnCarrito ? 'flex' : 'none';
 
-    // Función para calcular el total de los precios y mostrarlo
+    // Funcion para calcular el total de los precios y mostrarlo
     function calcularTotal() {
         const total = productosEnCarrito.reduce((accumulator, item) => {
             const precioNumerico = parseFloat(item.producto.precio.replace('US$', '').replace(',', ''));
@@ -241,7 +280,7 @@ function actualizarCarrito() {
     }
 }
 
-// Función para reducir el texto si es necesario
+// Funcion para reducir el texto
 function reducirTexto(texto, longitudMaxima) {
     if (texto.length > longitudMaxima) {
         return texto.substring(0, longitudMaxima) + '...';
@@ -249,16 +288,16 @@ function reducirTexto(texto, longitudMaxima) {
     return texto;
 }
 
-// Función para agregar los productos al cargar la página
+// funcion para agregar los productos al cargar la pagina
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
 
     productos.forEach(producto => {
-        // Crear elemento article
+        // crear elemento article
         const articulo = document.createElement('article');
         articulo.classList.add('card-container-min');
 
-        // Agregar clases adicionales según el producto (opcional)
+        // clases adicionales segun el producto 
         if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue") {
             articulo.classList.add('card__celun1'); 
         }
@@ -295,12 +334,47 @@ function agregarProductos() {
         contenedorProductos.appendChild(articulo);
     });
 
-    // Llamar a la función para actualizar el carrito al cargar la página
+    // llamar a la funcion para actualizar el carrito al cargar la pagina
     actualizarCarrito();
     cargarCarritoDesdeLocalStorage();
 }
 
+botonComprar.addEventListener('click', () => {
+    // Obtener el registro de compras existente del localStorage
+    let comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
+
+    
+    comprasGuardadas.push({
+        productos: productosEnCarrito,
+        fecha: new Date().toLocaleString()  
+    });
+
+    
+    localStorage.setItem('comprasGuardadas', JSON.stringify(comprasGuardadas));
+
+    
+    localStorage.removeItem('productosEnCarrito');
+    if (productosEnCarrito === false){
+        actualizarCarrito();
+    }
+
+    const mensajePagoExitoso = document.getElementById('mensajePagoExitoso');
+    mensajePagoExitoso.style.display = 'block';
+    mensajePagoExitoso.style.padding = '8px';
+    mensajePagoExitoso.style.fontSize = '1.4em';
+
+    setTimeout(() => {
+        mensajePagoExitoso.style.display = 'none';
+    }, 3000); 
+    
+});
+
+
+
+
+
 // Llamar a la función para agregar los productos al cargar la página
 agregarProductos();
+
 
 
