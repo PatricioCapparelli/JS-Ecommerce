@@ -36,12 +36,12 @@ let user = document.querySelector('#user');
 let inf_container = null;
 
 function validarRegistro(e) {
-    e.preventDefault(); // Prevenir la acción por defecto de submit
+    e.preventDefault(); 
 
     let nombreUsuario = document.getElementById('nombre').value.trim();
     let apellidoUsuario = document.getElementById('apellido').value.trim();
 
-    // Verificar si el usuario ya está registrado
+    // validacion
     if (usuarioRegistrado(nombreUsuario, apellidoUsuario)) {
         inf_container = document.createElement('div');
         inf_container.innerHTML = `
@@ -54,19 +54,19 @@ function validarRegistro(e) {
     let edadUsuario = document.getElementById('edad').value.trim();
     let contraseñaUsuario = document.getElementById('contraseña').value; 
 
-    // Crear una instancia de usuario con los datos del formulario
+    // instancia de usuario con los datos del formulario
     let usuario = new Usuario(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario);
 
     let mensaje = usuario.validar();
 
     if (mensaje === true) {
-        // Guardar en localStorage
+        // guardar en localStorage
         guardarUsuarioLocalStorage(usuario);
 
-        // Limpiar contenido anterior del article
+        // limpiar contenido anterior del article
         user.innerHTML = '';
 
-        // Mostrar mensaje de bienvenida
+        // mensaje de bienvenida
         inf_container = document.createElement('div');
         inf_container.innerHTML = `
             <p>Bienvenido <span class="inf_container">${usuario.nombreUsuario}</span>, registro exitoso ✔</p>
@@ -74,7 +74,7 @@ function validarRegistro(e) {
         user.appendChild(inf_container);
         boton.style.color = 'yellow';
     } else {
-        // Mostrar mensaje de error
+        // mensaje de error
         inf_container = document.createElement('div');
         inf_container.innerHTML = `
             <p>Error: ${mensaje} ✖</p>
@@ -83,40 +83,39 @@ function validarRegistro(e) {
     }
 }
 
-// Función para verificar si el usuario ya está registrado
+// verificar si el usuario esta registrado
 function usuarioRegistrado(nombreUsuario, apellidoUsuario) {
     let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // Buscar si hay algún usuario con el mismo nombre y apellido
+    // validacion
     return usuariosGuardados.some(usuario => usuario.nombreUsuario === nombreUsuario && usuario.apellidoUsuario === apellidoUsuario);
 }
 
-// Función para guardar usuario en localStorage
+// guardar usuario en localStorage
 function guardarUsuarioLocalStorage(usuario) {
-    // Obtener usuarios existentes del localStorage (si hay)
+    
     let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // Agregar el nuevo usuario
+    // agregar el nuevo usuario
     usuariosGuardados.push({
         nombreUsuario: usuario.nombreUsuario,
         apellidoUsuario: usuario.apellidoUsuario,
         edadUsuario: usuario.edadUsuario,
-        // No es recomendable guardar la contraseña en localStorage por razones de seguridad
+        
     });
 
-    // Guardar en localStorage
+    // guardar en localStorage
     localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
 }
 
 form.addEventListener('submit', validarRegistro);
 
-// Limpiar contenido al hacer clic en el botón
+// limpiar 
 boton.addEventListener('click', () => {
     if (inf_container) {
         inf_container.remove();
     }
 });
-
 
 const productos = [
     {
@@ -169,10 +168,10 @@ function agregarAlCarrito(producto) {
     const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
 
     if (productoExistente) {
-        // Si el producto ya esta en el carrito incrementar la cantidad.
+        // si el producto ya esta en el carrito incrementar la cantidad.
         productoExistente.cantidad++;
     } else {
-        // Si el producto no está en el carrito, agregarlo con cantidad 1
+        // si el producto no esta en el carrito, agregarlo con cantidad 1
         productosEnCarrito.push({
             producto: producto,
             cantidad: 1
@@ -198,24 +197,23 @@ function actualizarCarrito() {
     const carrito = document.getElementById('carrito');
     const totalElement = document.getElementById('total');
     
-
-    // Variable para verificar si hay productos en el carrito
+    // variable para verificar si hay productos en el carrito
     let hayProductosEnCarrito = false;
 
-    // Recorrer el array productosEnCarrito y agregar o actualizar cada producto en el carrito
+    // recorrer el array productosEnCarrito y agregar o actualizar cada producto en el carrito
     productosEnCarrito.forEach(item => {
         const producto = item.producto;
         const cantidad = item.cantidad;
 
-        // Verificar si ya existe el elemento en el carrito
+        // verificar si ya existe el elemento en el carrito
         let productoExistente = carrito.querySelector(`[data-nombre="${producto.nombre}"]`);
 
         if (productoExistente) {
-            // Actualizar la cantidad del producto existente
+            // actualizar la cantidad del producto 
             const cantidadElement = productoExistente.querySelector('.cantidad');
             cantidadElement.textContent = `(${cantidad})`;
         } else {
-            // Crear elemento para el nuevo producto en el carrito
+            // crear elemento para el nuevo producto en el carrito
             const productoCarrito = document.createElement('div');
             productoCarrito.classList.add('article__producto--carrito');
             productoCarrito.setAttribute('data-nombre', producto.nombre);
@@ -235,42 +233,39 @@ function actualizarCarrito() {
             // asignando el contenido 
             productoCarrito.innerHTML = contenidoHTML;
 
-            // Agregar evento para eliminar el producto del carrito
+            // evento para eliminar el producto del carrito
             const botonEliminar = productoCarrito.querySelector('.article__btn');
             botonEliminar.addEventListener('click', () => {
-                // Encontrar el indice del producto en el array
+                // encontrar el indice del producto en el array
                 const index = productosEnCarrito.findIndex(item => item.producto.nombre === producto.nombre);
 
-                // Reducir la cantidad del producto en el carrito
+                // reducir la cantidad del producto en el carrito
                 productosEnCarrito[index].cantidad--;
 
-                // Si la cantidad llega a cero, eliminar completamente el producto del carrito
+                // si la cantidad llega a cero, eliminar el producto del carrito
                 if (productosEnCarrito[index].cantidad === 0) {
-                    carrito.removeChild(productoCarrito); // Eliminar el elemento del DOM
-                    productosEnCarrito.splice(index, 1); // Eliminar el producto del array
+                    carrito.removeChild(productoCarrito); 
+                    productosEnCarrito.splice(index, 1); // eliminar el producto del array
                 }
 
                 localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
 
-                // Llamar a la funcion para actualizar la interfaz del carrito
+                
                 actualizarCarrito();
             });
 
-            // Agregar producto al carrito
+            // agregar producto al carrito
             carrito.appendChild(productoCarrito);
         }
 
-        // Actualizar la bandera si hay productos en el carrito
         hayProductosEnCarrito = true;
     });
 
-    // Mostrar el total siempre
     calcularTotal();
 
-    // Mostrar siempre el boton de comprar si hay productos en el carrito
     botonComprar.style.display = hayProductosEnCarrito ? 'flex' : 'none';
 
-    // Funcion para calcular el total de los precios y mostrarlo
+    // para calcular el total de los precios y mostrarlo
     function calcularTotal() {
         const total = productosEnCarrito.reduce((accumulator, item) => {
             const precioNumerico = parseFloat(item.producto.precio.replace('US$', '').replace(',', ''));
@@ -280,7 +275,7 @@ function actualizarCarrito() {
     }
 }
 
-// Funcion para reducir el texto
+// reducir el texto del carrito
 function reducirTexto(texto, longitudMaxima) {
     if (texto.length > longitudMaxima) {
         return texto.substring(0, longitudMaxima) + '...';
@@ -293,11 +288,10 @@ function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
 
     productos.forEach(producto => {
-        // crear elemento article
+        
         const articulo = document.createElement('article');
         articulo.classList.add('card-container-min');
 
-        // clases adicionales segun el producto 
         if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue") {
             articulo.classList.add('card__celun1'); 
         }
@@ -308,7 +302,7 @@ function agregarProductos() {
             articulo.classList.add('card__mon1'); 
         }
 
-        // Crear elementos dentro de article
+        // Creando elementos dentro de article
         const imagen = document.createElement('img');
         imagen.src = producto.imagen;
         imagen.alt = "imagen del producto";
@@ -324,35 +318,41 @@ function agregarProductos() {
         enlace.textContent = "🛒";
         enlace.addEventListener('click', () => agregarAlCarrito(producto));
 
-        // Agregar elementos al artículo
         articulo.appendChild(imagen);
         articulo.appendChild(precio);
         articulo.appendChild(nombre);
         articulo.appendChild(enlace);
 
-        // Agregar articulo al contenedor de productos
         contenedorProductos.appendChild(articulo);
     });
 
-    // llamar a la funcion para actualizar el carrito al cargar la pagina
     actualizarCarrito();
     cargarCarritoDesdeLocalStorage();
 }
 
 botonComprar.addEventListener('click', () => {
-    // Obtener el registro de compras existente del localStorage
+    
     let comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
 
-    
     comprasGuardadas.push({
         productos: productosEnCarrito,
         fecha: new Date().toLocaleString()  
     });
 
+    for (let i = 0; i < comprasGuardadas.length; i++) {
+        let compra = comprasGuardadas[i];
+        
+        let productos = compra.productos;
+        let fecha = compra.fecha;
+    
+        console.log(`Compra ${i + 1}:`);
+        console.log('Productos:', productos);
+        console.log('Fecha:', fecha);
+        console.log('');
+    }
     
     localStorage.setItem('comprasGuardadas', JSON.stringify(comprasGuardadas));
 
-    
     localStorage.removeItem('productosEnCarrito');
     if (productosEnCarrito === false){
         actualizarCarrito();
@@ -365,15 +365,10 @@ botonComprar.addEventListener('click', () => {
 
     setTimeout(() => {
         mensajePagoExitoso.style.display = 'none';
-    }, 3000); 
+    }, 4000); 
     
 });
 
-
-
-
-
-// Llamar a la función para agregar los productos al cargar la página
 agregarProductos();
 
 

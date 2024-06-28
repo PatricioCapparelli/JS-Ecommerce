@@ -38,6 +38,66 @@ a, p, li, h1, h2, h3, h4, h5 {
   color: #3185FA;
 }
 
+.nav__container-btn {
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #007bff;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+
+.nav__container-btn:hover {
+  background-color: #0056b3;
+  transition: 0.4s;
+}
+
+.nav__container-btn:active {
+  transform: scale(0.9);
+}
+
+.carrito__btn-- {
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #007bff;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+
+.carrito__btn--:hover {
+  background-color: #044488;
+  transition: 0.4s;
+}
+
+.carrito__btn--:active {
+  transform: scale(0.9);
+}
+
+.article__btn {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 18px;
+  background-color: #06090c;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+
+.article__btn:hover {
+  background-color: #21105c;
+  transition: 0.4s;
+}
+
+.article__btn:active {
+  transform: scale(0.9);
+}
+
 section {
   background-color: #E7E7E7;
   grid-area: section;
