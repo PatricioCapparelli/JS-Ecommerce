@@ -3,17 +3,13 @@
   padding-top: 6px;
 }
 .lista ul li a {
-  font-size: 16px;
+  font-size: 20px;
   padding: 10px;
   color: rgb(112, 99, 99);
-  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
-  font-family: "Playwrite FR Moderne", cursive;
   font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
 }
 .lista ul li a:hover {
   color: #3185FA;

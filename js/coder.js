@@ -71,8 +71,19 @@ function validarRegistro(e) {
         inf_container.innerHTML = `
             <p>Bienvenido <span class="inf_container">${usuario.nombreUsuario}</span>, registro exitoso ✔</p>
         `;
+        Toastify({
+            text: "Bienvenido",
+            style: {
+                background: 'yellow',
+                color: 'black'
+            },
+            position: 'left',
+            duration: 3000
+        }).showToast();
+
         user.appendChild(inf_container);
         boton.style.color = 'yellow';
+        boton.style.backgroundColor = 'black'
     } else {
         // mensaje de error
         inf_container = document.createElement('div');
@@ -157,21 +168,70 @@ const productos = [
         imagen: "./assets/images/monitorn1.webp",
         precio: "US$220",
         nombre: "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo"
+    },
+    {
+        imagen: "./assets/images/calefactorn1.webp",
+        precio: "US$110",
+        nombre: "Calefactor Electrico Alta Gama Exahome Con Termostato Ct03"
     }
 ];
 
-// variable para mantener los productos en el carrito con su cantidad
+// Variable para mantener los productos en el carrito con su cantidad
 let productosEnCarrito = [];
 
+// Agregar los productos al cargar la página
+function agregarProductos() {
+    const contenedorProductos = document.getElementById('productos');
+
+    productos.forEach(producto => {
+        const articulo = document.createElement('article');
+        articulo.classList.add('card-container-min');
+
+        // Clases personalizadas
+        if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue" ||
+            producto.nombre === "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi" ||
+            producto.nombre === "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo" ||
+            producto.nombre === "Calefactor Electrico Alta Gama Exahome Con Termostato Ct03") {
+            articulo.classList.add('card__product');
+        }
+
+        // Creando elementos dentro de article
+        const imagen = document.createElement('img');
+        imagen.src = producto.imagen;
+        imagen.alt = "imagen del producto";
+
+        const precio = document.createElement('h2');
+        precio.textContent = producto.precio;
+
+        const nombre = document.createElement('p');
+        nombre.textContent = producto.nombre;
+
+        const enlace = document.createElement('a');
+        enlace.href = "#carrito__compra";
+        enlace.textContent = "🛒";
+        enlace.addEventListener('click', () => agregarAlCarrito(producto));
+
+        articulo.appendChild(imagen);
+        nombre.appendChild(precio);
+        articulo.appendChild(nombre);
+        nombre.appendChild(enlace);
+
+        contenedorProductos.appendChild(articulo);
+    });
+
+    // Cargar el carrito desde localStorage al cargar la página
+    cargarCarritoDesdeLocalStorage();
+}
+
 function agregarAlCarrito(producto) {
-    // verificar si el producto ya esta en el carrito
+    // Verificar si el producto ya está en el carrito
     const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
 
     if (productoExistente) {
-        // si el producto ya esta en el carrito incrementar la cantidad.
+        // Si el producto ya está en el carrito, incrementar la cantidad
         productoExistente.cantidad++;
     } else {
-        // si el producto no esta en el carrito, agregarlo con cantidad 1
+        // Si el producto no está en el carrito, agregarlo con cantidad 1
         productosEnCarrito.push({
             producto: producto,
             cantidad: 1
@@ -191,91 +251,65 @@ function cargarCarritoDesdeLocalStorage() {
     }
 }
 
-let botonComprar = document.getElementById('botonComprar');
-
 function actualizarCarrito() {
     const carrito = document.getElementById('carrito');
     const totalElement = document.getElementById('total');
-    
-    // variable para verificar si hay productos en el carrito
-    let hayProductosEnCarrito = false;
+    carrito.innerHTML = ''; // Limpiar el contenido del carrito antes de actualizar
 
-    // recorrer el array productosEnCarrito y agregar o actualizar cada producto en el carrito
+    let hayProductosEnCarrito = false;
+    let total = 0;
+
     productosEnCarrito.forEach(item => {
         const producto = item.producto;
         const cantidad = item.cantidad;
 
-        // verificar si ya existe el elemento en el carrito
-        let productoExistente = carrito.querySelector(`[data-nombre="${producto.nombre}"]`);
+        // Crear elemento para cada producto en el carrito
+        const productoCarrito = document.createElement('div');
+        productoCarrito.classList.add('article__producto--carrito');
+        productoCarrito.setAttribute('data-nombre', producto.nombre);
 
-        if (productoExistente) {
-            // actualizar la cantidad del producto 
-            const cantidadElement = productoExistente.querySelector('.cantidad');
-            cantidadElement.textContent = `(${cantidad})`;
-        } else {
-            // crear elemento para el nuevo producto en el carrito
-            const productoCarrito = document.createElement('div');
-            productoCarrito.classList.add('article__producto--carrito');
-            productoCarrito.setAttribute('data-nombre', producto.nombre);
+        // Contenido HTML del producto en el carrito
+        const contenidoHTML = `
+            <div class="carrito__contenido">
+                <p>${reducirTexto(producto.nombre, 20)} <span class="cantidad">(${cantidad})</span></p>
+                <img class="img__producto" src="${producto.imagen}" alt="imagen del producto">
+            </div>
+            <div class="carrito__contenido">
+                <span>${producto.precio}</span>
+                <button class="article__btn">✖</button>
+            </div>
+        `;
+        productoCarrito.innerHTML = contenidoHTML;
 
-            // contenido HTML del producto en el carrito
-            const contenidoHTML = `
-                <div class="carrito__contenido">
-                    <p>${reducirTexto(producto.nombre, 20)} <span class="cantidad">(${cantidad})</span></p>
-                    <img class="img__producto" src="${producto.imagen}" alt="imagen del producto">
-                </div>
-                <div class="carrito__contenido">
-                    <span>${producto.precio}</span>
-                    <button class="article__btn">Quitar</button>
-                </div>
-            `;
+        // Evento para eliminar el producto del carrito
+        const botonEliminar = productoCarrito.querySelector('.article__btn');
+        botonEliminar.addEventListener('click', () => {
+            const index = productosEnCarrito.findIndex(item => item.producto.nombre === producto.nombre);
 
-            // asignando el contenido 
-            productoCarrito.innerHTML = contenidoHTML;
+            productosEnCarrito[index].cantidad--;
 
-            // evento para eliminar el producto del carrito
-            const botonEliminar = productoCarrito.querySelector('.article__btn');
-            botonEliminar.addEventListener('click', () => {
-                // encontrar el indice del producto en el array
-                const index = productosEnCarrito.findIndex(item => item.producto.nombre === producto.nombre);
+            if (productosEnCarrito[index].cantidad === 0) {
+                productosEnCarrito.splice(index, 1);
+            }
 
-                // reducir la cantidad del producto en el carrito
-                productosEnCarrito[index].cantidad--;
+            localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
+            actualizarCarrito();
+        });
 
-                // si la cantidad llega a cero, eliminar el producto del carrito
-                if (productosEnCarrito[index].cantidad === 0) {
-                    carrito.removeChild(productoCarrito); 
-                    productosEnCarrito.splice(index, 1); // eliminar el producto del array
-                }
-
-                localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
-
-                
-                actualizarCarrito();
-            });
-
-            // agregar producto al carrito
-            carrito.appendChild(productoCarrito);
-        }
-
+        carrito.appendChild(productoCarrito);
         hayProductosEnCarrito = true;
+
+        // Calcular total
+        const precioNumerico = parseFloat(producto.precio.replace('US$', '').replace(',', ''));
+        total += precioNumerico * cantidad;
     });
 
-    calcularTotal();
-
+    totalElement.textContent = `Total: US$${total.toFixed(2)}`;
+    const botonComprar = document.getElementById('botonComprar');
     botonComprar.style.display = hayProductosEnCarrito ? 'flex' : 'none';
-
-    // para calcular el total de los precios y mostrarlo
-    function calcularTotal() {
-        const total = productosEnCarrito.reduce((accumulator, item) => {
-            const precioNumerico = parseFloat(item.producto.precio.replace('US$', '').replace(',', ''));
-            return accumulator + (precioNumerico * item.cantidad);
-        }, 0);
-        totalElement.textContent = `Total: US$${total.toFixed(2)}`;
-    }
 }
 
-// reducir el texto del carrito
+// Reducir el texto del carrito si es necesario
 function reducirTexto(texto, longitudMaxima) {
     if (texto.length > longitudMaxima) {
         return texto.substring(0, longitudMaxima) + '...';
@@ -283,93 +317,46 @@ function reducirTexto(texto, longitudMaxima) {
     return texto;
 }
 
-// funcion para agregar los productos al cargar la pagina
-function agregarProductos() {
-    const contenedorProductos = document.getElementById('productos');
 
-    productos.forEach(producto => {
-        
-        const articulo = document.createElement('article');
-        articulo.classList.add('card-container-min');
-
-        if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue") {
-            articulo.classList.add('card__celun1'); 
-        }
-        if (producto.nombre === "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi") {
-            articulo.classList.add('card__pcn1'); 
-        }
-        if (producto.nombre === "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo") {
-            articulo.classList.add('card__mon1'); 
-        }
-
-        // Creando elementos dentro de article
-        const imagen = document.createElement('img');
-        imagen.src = producto.imagen;
-        imagen.alt = "imagen del producto";
-
-        const precio = document.createElement('h2');
-        precio.textContent = producto.precio;
-
-        const nombre = document.createElement('p');
-        nombre.textContent = producto.nombre;
-
-        const enlace = document.createElement('a');
-        enlace.href = "#carrito";
-        enlace.textContent = "🛒";
-        enlace.addEventListener('click', () => agregarAlCarrito(producto));
-
-        articulo.appendChild(imagen);
-        articulo.appendChild(precio);
-        articulo.appendChild(nombre);
-        articulo.appendChild(enlace);
-
-        contenedorProductos.appendChild(articulo);
-    });
-
-    actualizarCarrito();
-    cargarCarritoDesdeLocalStorage();
-}
-
+// Botón de comprar
+const botonComprar = document.getElementById('botonComprar');
 botonComprar.addEventListener('click', () => {
-    
+    // Guardar compras en localStorage
     let comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-
-    comprasGuardadas.push({
+        comprasGuardadas.push({
         productos: productosEnCarrito,
         fecha: new Date().toLocaleString()  
     });
-
-    for (let i = 0; i < comprasGuardadas.length; i++) {
-        let compra = comprasGuardadas[i];
-        
-        let productos = compra.productos;
-        let fecha = compra.fecha;
-    
-        console.log(`Compra ${i + 1}:`);
-        console.log('Productos:', productos);
-        console.log('Fecha:', fecha);
-        console.log('');
-    }
-    
     localStorage.setItem('comprasGuardadas', JSON.stringify(comprasGuardadas));
 
+    // Limpiar el carrito despues de la compra
+    productosEnCarrito = [];
     localStorage.removeItem('productosEnCarrito');
-    if (productosEnCarrito === false){
-        actualizarCarrito();
-    }
 
+    // // actualizar el total y esconder el boton de compra
+    actualizarCarrito();
+
+    // mostrar mensaje de pago exitoso
     const mensajePagoExitoso = document.getElementById('mensajePagoExitoso');
     mensajePagoExitoso.style.display = 'block';
     mensajePagoExitoso.style.padding = '8px';
     mensajePagoExitoso.style.fontSize = '1.4em';
 
+    Swal.fire({
+        title: 'LISTO!',
+        text: 'Pago realizado con exito!',
+        icon: 'success',
+        confirmButtonText: 'Confirmar'
+    })
+
     setTimeout(() => {
         mensajePagoExitoso.style.display = 'none';
-    }, 4000); 
-    
+    }, 4000);
 });
 
+// Llamar a la función para agregar los productos al cargar la página
 agregarProductos();
+
 
 
 
