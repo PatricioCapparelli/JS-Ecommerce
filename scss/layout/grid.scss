@@ -1,4 +1,4 @@
-body{
+.container{
     width: 100%;
     max-width: 1600px;
     height: auto;
@@ -35,3 +35,13 @@ body{
     
 }
 
+// compras
+
+.hero__container{
+    height: 100vh;
+    background-image: url(/assets/images/fondon2.jpg);
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

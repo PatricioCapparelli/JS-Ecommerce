@@ -37,4 +37,8 @@ header .head__container-pr {
   justify-content: center;
 }
 
+.hero__container-head {
+  height: 100px;
+}
+
 /*# sourceMappingURL=header.css.map */

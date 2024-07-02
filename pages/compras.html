@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="http://127.0.0.1:5500/index.html#carrito__compra">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
-    <title>JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>ComprasJS</title>
 </head>
-<body class="container">
-    <header>
+<body class="hero__container">
+    <header class="hero__container-head">
         <div class="head__container">
             <div class="head__container-pr">
             <h1>Tienda</h1>
@@ -17,18 +18,18 @@
             </div>
             <div class="lista">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="./pages/compras.html">Products</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="">Products</a></li>
                     <li><a href="">Oferts</a></li>
                     <li><a href="">Contact</a></li>
                 </ul>
             </div>
-            <a href="./pages/compras.html"><img class="head__container-img" src="./assets/images/carrito-de-compras.png" alt="logo de carrito de compras"></a>
+            <img class="head__container-img" src="../assets/images/carrito-de-compras.png" alt="logo de carrito de compras">
         </div>
     </header>
     <!-- registro -->
-    <nav> 
-        <div class="nav__container">
+    <nav style="display: none;"> 
+        <div style="display: none;">
             <h2>Registrate</h2>
             <form action="" id="form_t" class="nav__container-form">
                 <input type="text" class="date" placeholder="Nombre" id="nombre">
@@ -42,10 +43,10 @@
             </div>
         </div>
         <!-- carrito -->
-        <article class="carrito__compra">
+        <article style="display: none;">
             <div class="carrito__compra-title">
                 <h3>Carrito</h3>
-                <img class="carrito__compra--img" src="./assets/images/cart.png" alt="carrito de compras">
+                <img class="carrito__compra--img" src="../assets/images/cart.png" alt="carrito de compras">
             </div>
             <div>
                 <div id="carrito">
@@ -59,14 +60,20 @@
                 </p>
             </div>
         </article>
-        <button class="btn__verCompras-i"><a href="./pages/compras.html">Ver compras</a></button>
-        <button style="display: none;" id="btnVerCompras"><a href="./pages/compras.html">Ver compras</a></button>
-        <div class="swiffy-slider slider-item-show2 slider-item-reveal slider-nav-dark" 
-        style="--swiffy-slider-item-ratio:100/33.3;
-        --swiffy-slider-nav-light:lightcyan;
-        --swiffy-slider-nav-dark:darkolivegreen;
-        --swiffy-slider-nav-zoom:85%;
-        --swiffy-slider-item-reveal:25%;">
+    </nav>
+    <!-- productos -->
+    <section style="display: none;">
+        <div id="productos" class="c-container">
+        </div>
+    </section>
+    <button class="btn__verCompras" id="btnVerCompras">Ver compras</button>
+
+<div class="swiffy-slider slider-item-show2 slider-item-reveal slider-nav-dark" 
+    style="--swiffy-slider-item-ratio:100/33.3;
+    --swiffy-slider-nav-light:lightcyan;
+    --swiffy-slider-nav-dark:darkolivegreen;
+    --swiffy-slider-nav-zoom:85%;
+    --swiffy-slider-item-reveal:25%;">
     <ul class="slider-container" id="comprasGuardadasContainer">
     </ul>
     <button type="button" class="slider-nav"></button>
@@ -78,16 +85,10 @@
         <button></button>
     </div>
 </div>
-    </nav>
-    <!-- productos -->
-    <section>
-        <div id="productos" class="c-container">
-        </div>
-    </section>
     <aside></aside>
     <footer></footer>
-    <script src="js/coder.js"></script>
+    <script src="../js/coder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.all.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
 </body>
 </html>

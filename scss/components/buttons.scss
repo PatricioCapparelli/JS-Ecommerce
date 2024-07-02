@@ -80,5 +80,46 @@
     transform: scale(0.9);
 }
 
+// compras
 
+.btn__verCompras { 
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+    
 
+}
+.btn__verCompras:hover {
+    background-color: #24116b;
+    transition: .4s;
+    box-shadow: #06090c;
+    color: yellow;
+    
+}
+.btn__verCompras:active {
+    transform: scale(0.9);
+}
+
+.btn__verCompras-i{
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #eeff00;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.btn__verCompras-i:hover{
+    background-color: #06090c;
+    transition: 0.4s;
+}

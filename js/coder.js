@@ -10,7 +10,7 @@ class Usuario {
         const nombreUsuario = this.nombreUsuario.trim();
         const apellidoUsuario = this.apellidoUsuario.trim();
         const edadUsuario = parseInt(this.edadUsuario);
-        const contraseñaUsuario = this.contraseñaUsuario; 
+        const contraseñaUsuario = this.contraseñaUsuario;
         const regexNombreApellido = /^[a-zA-Z]+$/;
 
         if (nombreUsuario && apellidoUsuario && !isNaN(edadUsuario) && edadUsuario >= 18 && contraseñaUsuario.length >= 8) {
@@ -36,7 +36,7 @@ let user = document.querySelector('#user');
 let inf_container = null;
 
 function validarRegistro(e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     let nombreUsuario = document.getElementById('nombre').value.trim();
     let apellidoUsuario = document.getElementById('apellido').value.trim();
@@ -52,7 +52,7 @@ function validarRegistro(e) {
     }
 
     let edadUsuario = document.getElementById('edad').value.trim();
-    let contraseñaUsuario = document.getElementById('contraseña').value; 
+    let contraseñaUsuario = document.getElementById('contraseña').value;
 
     // instancia de usuario con los datos del formulario
     let usuario = new Usuario(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario);
@@ -104,7 +104,7 @@ function usuarioRegistrado(nombreUsuario, apellidoUsuario) {
 
 // guardar usuario en localStorage
 function guardarUsuarioLocalStorage(usuario) {
-    
+
     let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
     // agregar el nuevo usuario
@@ -112,7 +112,7 @@ function guardarUsuarioLocalStorage(usuario) {
         nombreUsuario: usuario.nombreUsuario,
         apellidoUsuario: usuario.apellidoUsuario,
         edadUsuario: usuario.edadUsuario,
-        
+
     });
 
     // guardar en localStorage
@@ -130,46 +130,55 @@ boton.addEventListener('click', () => {
 
 const productos = [
     {
+        id: 1,
         imagen: "./assets/images/compun1.webp",
         precio: "US$380",
         nombre: "Notebook Exo Smart T38 Intel N4020 4gb Ssd128gb Windows 11 Color Gris"
     },
     {
+        id: 2,
         imagen: "./assets/images/ledn1.webp",
         precio: "US$330",
         nombre: "Tv Smart Led Philips 32 Hd 32phd6918/77 Google Tv"
     },
     {
+        id: 3,
         imagen: "./assets/images/celun1.webp",
         precio: "US$400",
         nombre: "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue"
     },
     {
+        id: 4,
         imagen: "./assets/images/zapan1.webp",
         precio: "US$199",
         nombre: "Zapatillas Jaguar Oficial Deportiva Art. #9339 39al45"
     },
     {
+        id: 5,
         imagen: "./assets/images/jbl.webp",
         precio: "US$90",
         nombre: "Parlante Jbl Flip 6 Portatil Bluetooth Color Negro"
     },
     {
+        id: 6,
         imagen: "./assets/images/pcn1.webp",
         precio: "US$530",
         nombre: "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi"
     },
     {
+        id: 7,
         imagen: "./assets/images/taladron1.webp",
         precio: "US$180",
         nombre: "Taladro Atornillador Percutor + 2 Baterias Gp By Lusqtoff"
     },
     {
+        id: 8,
         imagen: "./assets/images/monitorn1.webp",
         precio: "US$220",
         nombre: "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo"
     },
     {
+        id: 9,
         imagen: "./assets/images/calefactorn1.webp",
         precio: "US$110",
         nombre: "Calefactor Electrico Alta Gama Exahome Con Termostato Ct03"
@@ -179,7 +188,7 @@ const productos = [
 // Variable para mantener los productos en el carrito con su cantidad
 let productosEnCarrito = [];
 
-// Agregar los productos al cargar la página
+// Agregar los productos al cargar la pagina
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
 
@@ -219,7 +228,7 @@ function agregarProductos() {
         contenedorProductos.appendChild(articulo);
     });
 
-    // Cargar el carrito desde localStorage al cargar la página
+    // Cargar el carrito desde localStorage al cargar la pagina
     cargarCarritoDesdeLocalStorage();
 }
 
@@ -228,18 +237,19 @@ function agregarAlCarrito(producto) {
     const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
 
     if (productoExistente) {
-        // Si el producto ya está en el carrito, incrementar la cantidad
+        // Si el producto ya esta en el carrito, incrementar la cantidad
         productoExistente.cantidad++;
     } else {
-        // Si el producto no está en el carrito, agregarlo con cantidad 1
+        // Si el producto no esta en el carrito, agregarlo con cantidad 1
         productosEnCarrito.push({
+            id: producto.id,
             producto: producto,
             cantidad: 1
         });
     }
 
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
-    
+
     actualizarCarrito();
 }
 
@@ -254,7 +264,7 @@ function cargarCarritoDesdeLocalStorage() {
 function actualizarCarrito() {
     const carrito = document.getElementById('carrito');
     const totalElement = document.getElementById('total');
-    carrito.innerHTML = ''; // Limpiar el contenido del carrito antes de actualizar
+    carrito.innerHTML = ''; // limpiar el contenido del carrito antes de actualizar
 
     let hayProductosEnCarrito = false;
     let total = 0;
@@ -309,7 +319,7 @@ function actualizarCarrito() {
     botonComprar.style.display = hayProductosEnCarrito ? 'flex' : 'none';
 }
 
-// Reducir el texto del carrito si es necesario
+// Reducir el texto del carrito
 function reducirTexto(texto, longitudMaxima) {
     if (texto.length > longitudMaxima) {
         return texto.substring(0, longitudMaxima) + '...';
@@ -318,14 +328,14 @@ function reducirTexto(texto, longitudMaxima) {
 }
 
 
-// Botón de comprar
+// Boton de comprar
 const botonComprar = document.getElementById('botonComprar');
 botonComprar.addEventListener('click', () => {
     // Guardar compras en localStorage
     let comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        comprasGuardadas.push({
+    comprasGuardadas.push({
         productos: productosEnCarrito,
-        fecha: new Date().toLocaleString()  
+        fecha: new Date().toLocaleString()
     });
     localStorage.setItem('comprasGuardadas', JSON.stringify(comprasGuardadas));
 
@@ -354,9 +364,75 @@ botonComprar.addEventListener('click', () => {
     }, 4000);
 });
 
-// Llamar a la función para agregar los productos al cargar la página
+// Llamar a la funcion para agregar los productos al cargar la pagina
 agregarProductos();
 
+document.addEventListener('DOMContentLoaded', function () {
+    const botonVerCompras = document.getElementById('btnVerCompras');
+    const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
+    const swiffySlider = document.querySelector('.swiffy-slider');
+    swiffySlider.style.display = 'none'; // ccultar el carrusel
+
+    botonVerCompras.addEventListener('click', function () {
+        // Obtener las compras guardadas del localStorage
+        const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
+        botonVerCompras.style.display = 'none'; // Ocultar el botón Ver compras
+
+        // Verificar si hay compras guardadas
+        if (comprasGuardadas.length === 0) {
+            Swal.fire({
+                title: 'VACIO!',
+                text: 'No hiciste ninguna compra!',
+                icon: 'info',
+                confirmButtonText: 'Confirmar'
+            })
+            return; // Salir de la función si no hay productos
+        }
+
+        let contenidoHTML = '';
+        // Objeto para contar la cantidad de cada producto
+        const productosCantidad = {};
+
+        // Iterar sobre las compras guardadas para contar la cantidad de cada producto
+        comprasGuardadas.forEach(compra => {
+            compra.productos.forEach(item => {
+                const idProducto = item.id;
+                if (productosCantidad[idProducto]) {
+                    productosCantidad[idProducto].cantidad++;
+                } else {
+                    productosCantidad[idProducto] = {
+                        id: idProducto,
+                        producto: item.producto,
+                        cantidad: 1
+                    };
+                }
+            });
+        });
+
+        // Construir el HTML para mostrar los productos con su cantidad
+        for (const key in productosCantidad) {
+            if (productosCantidad.hasOwnProperty(key)) {
+                const producto = productosCantidad[key];
+                contenidoHTML += `
+                    <li class="slider-item">
+                        <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
+                        <h3 style="color: white;">${producto.producto.nombre}</h3>
+                        <p style="color: yellow;">Cantidad: ${producto.cantidad}</p>
+                        <p style="color: yellow;">Precio: ${producto.producto.precio}</p>
+                    </li>
+                `;
+            }
+        }
+
+        // Insertar el HTML generado en el contenedor del carrusel
+        comprasGuardadasContainer.innerHTML = contenidoHTML;
+
+        // Mostrar el carrusel solo si hay productos
+        if (comprasGuardadas.length > 0) {
+            swiffySlider.style.display = 'block';
+        }
+    });
+});
 
 
 

@@ -93,15 +93,70 @@ a, p, li, h1, h2, h3, h4, h5 {
   transform: scale(0.9);
 }
 
+.btn__verCompras {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.btn__verCompras:hover {
+  background-color: #24116b;
+  transition: 0.4s;
+  box-shadow: #06090c;
+  color: yellow;
+}
+
+.btn__verCompras:active {
+  transform: scale(0.9);
+}
+
+.btn__verCompras-i {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #eeff00;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.btn__verCompras-i:hover {
+  background-color: #06090c;
+  transition: 0.4s;
+}
+
 section {
   background-color: #E7E7E7;
   grid-area: section;
 }
 
-.block__section {
+.compras__guardadas-img {
+  width: auto;
+  height: 300px;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  margin: 5px;
+}
+
+.slider-item {
   display: flex;
-  gap: 140px;
-  margin-top: 30px;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px;
+  color: white;
 }
 
 .card-container-min {
@@ -156,7 +211,7 @@ footer {
   grid-area: footer;
 }
 
-body {
+.container {
   width: 100%;
   max-width: 1600px;
   height: auto;
@@ -176,6 +231,15 @@ body {
   width: 100%;
   transition: 0.3s;
   grid-template-areas: "nav block" "nav block" "nav block";
+}
+
+.hero__container {
+  height: 100vh;
+  background-image: url(/assets/images/fondon2.jpg);
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 header {
@@ -215,6 +279,10 @@ header .head__container-pr {
   align-items: center;
   gap: 10px;
   justify-content: center;
+}
+
+.hero__container-head {
+  height: 100px;
 }
 
 nav {
@@ -308,10 +376,24 @@ section {
   grid-area: section;
 }
 
-.block__section {
+.compras__guardadas-img {
+  width: auto;
+  height: 300px;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  margin: 5px;
+}
+
+.slider-item {
   display: flex;
-  gap: 140px;
-  margin-top: 30px;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
