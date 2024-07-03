@@ -216,7 +216,7 @@ function agregarProductos() {
         nombre.textContent = producto.nombre;
 
         const enlace = document.createElement('a');
-        enlace.href = "#carrito__compra";
+        enlace.href = "#carrito";
         enlace.textContent = "🛒";
         enlace.addEventListener('click', () => agregarAlCarrito(producto));
 
@@ -233,7 +233,7 @@ function agregarProductos() {
 }
 
 function agregarAlCarrito(producto) {
-    // Verificar si el producto ya está en el carrito
+    // Verificar si el producto ya esta en el carrito
     const productoExistente = productosEnCarrito.find(item => item.producto.nombre === producto.nombre);
 
     if (productoExistente) {
@@ -368,15 +368,15 @@ botonComprar.addEventListener('click', () => {
 agregarProductos();
 
 document.addEventListener('DOMContentLoaded', function () {
-    const botonVerCompras = document.getElementById('btnVerCompras');
+    const botonProductosComprados = document.getElementById('btnProductosComprados');
     const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
     const swiffySlider = document.querySelector('.swiffy-slider');
-    swiffySlider.style.display = 'none'; // ccultar el carrusel
+    swiffySlider.style.display = 'none'; // ocultar el carrusel
 
-    botonVerCompras.addEventListener('click', function () {
+    botonProductosComprados.addEventListener('click', function () {
         // Obtener las compras guardadas del localStorage
         const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        botonVerCompras.style.display = 'none'; // Ocultar el botón Ver compras
+        // botonProductosComprados.style.display = 'none'; // Ocultar el botón Ver compras
 
         // Verificar si hay compras guardadas
         if (comprasGuardadas.length === 0) {
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 icon: 'info',
                 confirmButtonText: 'Confirmar'
             })
-            return; // Salir de la función si no hay productos
+            return; 
         }
 
         let contenidoHTML = '';
@@ -409,14 +409,15 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+
         // Construir el HTML para mostrar los productos con su cantidad
         for (const key in productosCantidad) {
             if (productosCantidad.hasOwnProperty(key)) {
                 const producto = productosCantidad[key];
                 contenidoHTML += `
-                    <li class="slider-item">
-                        <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
+                    <li class="slider-items">
                         <h3 style="color: white;">${producto.producto.nombre}</h3>
+                        <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
                         <p style="color: yellow;">Cantidad: ${producto.cantidad}</p>
                         <p style="color: yellow;">Precio: ${producto.producto.precio}</p>
                     </li>
@@ -424,6 +425,79 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        
+        // Insertar el HTML generado en el contenedor del carrusel
+        comprasGuardadasContainer.innerHTML = contenidoHTML;
+
+        // Mostrar el carrusel solo si hay productos
+        if (comprasGuardadas.length > 0) {
+            swiffySlider.style.display = 'block';
+        }
+    });
+});
+
+
+        // boton de page 'compras'
+
+    
+        document.addEventListener('DOMContentLoaded', function () {
+    const botonVerCompras = document.getElementById('btnVerCompras');
+    const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
+    const swiffySlider = document.querySelector('.swiffy-slider');
+    swiffySlider.style.display = 'none'; // ocultar el carrusel
+
+    botonVerCompras.addEventListener('click', function () {
+        // Obtener las compras guardadas del localStorage
+        const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
+        botonVerCompras.style.display = 'none'; // Ocultar el botón Ver compras
+
+        // Verificar si hay compras guardadas
+        if (comprasGuardadas.length === 0) {
+            Swal.fire({
+                title: 'VACIO!',
+                text: 'No hiciste ninguna compra!',
+                icon: 'info',
+                confirmButtonText: 'Confirmar'
+            })
+            return; 
+        }
+
+        let contenidoHTML = '';
+        // Objeto para contar la cantidad de cada producto
+        const productosCantidad = {};
+
+        // Iterar sobre las compras guardadas para contar la cantidad de cada producto
+        comprasGuardadas.forEach(compra => {
+            compra.productos.forEach(item => {
+                const idProducto = item.id;
+                if (productosCantidad[idProducto]) {
+                    productosCantidad[idProducto].cantidad++;
+                } else {
+                    productosCantidad[idProducto] = {
+                        id: idProducto,
+                        producto: item.producto,
+                        cantidad: 1
+                    };
+                }
+            });
+        });
+
+
+        // Construir el HTML para mostrar los productos con su cantidad
+        for (const key in productosCantidad) {
+            if (productosCantidad.hasOwnProperty(key)) {
+                const producto = productosCantidad[key];
+                contenidoHTML += `
+                    <li class="slider-item">
+                        <h3 style="color: white;">${producto.producto.nombre}</h3>
+                        <p style="color: yellow;">Cantidad: ${producto.cantidad}</p>
+                        <p style="color: yellow;">Precio: ${producto.producto.precio}</p>
+                    </li>
+                `;
+            }
+        }
+//  // <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
+        
         // Insertar el HTML generado en el contenedor del carrusel
         comprasGuardadasContainer.innerHTML = contenidoHTML;
 
