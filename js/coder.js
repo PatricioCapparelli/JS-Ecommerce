@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function () {
     botonProductosComprados.addEventListener('click', function () {
         // Obtener las compras guardadas del localStorage
         const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        // botonProductosComprados.style.display = 'none'; // Ocultar el botón Ver compras
+        // botonProductosComprados.style.display = 'none'; // Ocultar el boton 'Ver compras'
 
         // Verificar si hay compras guardadas
         if (comprasGuardadas.length === 0) {
