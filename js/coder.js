@@ -508,5 +508,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+let setTime = document.getElementById('setTime');
 
-
+setInterval(() => {
+    const time = document.querySelector('#setTime');
+    const date = new Date();
+    time.innerHTML = 
+    `
+    ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
+    `
+    setTime.appendChild(ime);
+}, 1000);
