@@ -20,6 +20,15 @@
   grid-template-areas: "nav block" "nav block" "nav block";
 }
 
+@media (max-width: 1080px) {
+  .container {
+    grid-template-rows: 130px auto 1fr auto;
+    grid-template-areas: "header header header" "section section section" "section section section" "nav nav nav" "footer footer footer";
+  }
+  .c-container {
+    grid-template-areas: "block" "block" "nav" "nav";
+  }
+}
 .hero__container {
   height: 100vh;
   background-size: cover;

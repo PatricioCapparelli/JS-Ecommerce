@@ -496,9 +496,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
             }
         }
-//  // <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
         
-        // Insertar el HTML generado en el contenedor del carrusel
+        // Insertar el HTML en el contenedor del carrusel
         comprasGuardadasContainer.innerHTML = contenidoHTML;
 
         // Mostrar el carrusel solo si hay productos
@@ -508,14 +507,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// reloj
+
 let setTime = document.getElementById('setTime');
 
-setInterval(() => {
-    const time = document.querySelector('#setTime');
+function updateTime() {
+    const time = document.createElement('div');
     const date = new Date();
-    time.innerHTML = 
-    `
-    ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
-    `
-    setTime.appendChild(ime);
-}, 1000);
+    time.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    setTime.innerHTML = '';
+    setTime.appendChild(time);
+    setTimeout(updateTime, 1000);
+}
+updateTime();
