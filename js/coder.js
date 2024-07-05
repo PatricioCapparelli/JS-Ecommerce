@@ -185,7 +185,7 @@ const productos = [
     }
 ];
 
-// Variable para mantener los productos en el carrito con su cantidad
+// Variable para ver guardar productos 
 let productosEnCarrito = [];
 
 // Agregar los productos al cargar la pagina
@@ -346,7 +346,7 @@ botonComprar.addEventListener('click', () => {
     // // actualizar el total y esconder el boton de compra
     actualizarCarrito();
 
-    // mostrar mensaje de pago exitoso
+    //  mensaje de pago exitoso
     const mensajePagoExitoso = document.getElementById('mensajePagoExitoso');
     mensajePagoExitoso.style.display = 'block';
     mensajePagoExitoso.style.padding = '8px';
@@ -364,7 +364,6 @@ botonComprar.addEventListener('click', () => {
     }, 4000);
 });
 
-// Llamar a la funcion para agregar los productos al cargar la pagina
 agregarProductos();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -374,9 +373,8 @@ document.addEventListener('DOMContentLoaded', function () {
     swiffySlider.style.display = 'none'; // ocultar el carrusel
 
     botonProductosComprados.addEventListener('click', function () {
-        // Obtener las compras guardadas del localStorage
+        
         const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        // botonProductosComprados.style.display = 'none'; // Ocultar el boton 'Ver compras'
 
         // Verificar si hay compras guardadas
         if (comprasGuardadas.length === 0) {
@@ -425,31 +423,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        
-        // Insertar el HTML generado en el contenedor del carrusel
         comprasGuardadasContainer.innerHTML = contenidoHTML;
 
-        // Mostrar el carrusel solo si hay productos
+        // Mostrar el carrusel si hay productos
         if (comprasGuardadas.length > 0) {
             swiffySlider.style.display = 'block';
         }
     });
 });
 
-
         // boton de page 'compras'
 
-    
-        document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const botonVerCompras = document.getElementById('btnVerCompras');
     const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
     const swiffySlider = document.querySelector('.swiffy-slider');
-    swiffySlider.style.display = 'none'; // ocultar el carrusel
+    swiffySlider.style.display = 'none'; 
 
     botonVerCompras.addEventListener('click', function () {
-        // Obtener las compras guardadas del localStorage
+
         const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        botonVerCompras.style.display = 'none'; // Ocultar el botón Ver compras
+        botonVerCompras.style.display = 'none'; 
 
         // Verificar si hay compras guardadas
         if (comprasGuardadas.length === 0) {
@@ -520,3 +514,31 @@ function updateTime() {
     setTimeout(updateTime, 1000);
 }
 updateTime();
+
+// btn limpiar carrito
+
+let btnLimpiarCarro = document.getElementById('btnLimpiarCarro');
+
+btnLimpiarCarro.addEventListener('click', () => {
+
+    let comprasGuardadas = localStorage.getItem('comprasGuardadas');
+    
+    if (comprasGuardadas) {
+        localStorage.removeItem('comprasGuardadas');
+        console.log('Se han eliminado las compras guardadas.');
+        comprasGuardadasContainer.innerHTML = ''
+        const slider = document.getElementById('slider');
+        slider.style.display = 'none'
+    } else {
+        Toastify({
+            text: "No hiciste ninguna compra, o limpiaste las anteriores",
+            style: {
+                background: 'yellow',
+                color: 'black'
+            },
+            position: 'left',
+            duration: 3000
+        }).showToast();
+    }
+});
+

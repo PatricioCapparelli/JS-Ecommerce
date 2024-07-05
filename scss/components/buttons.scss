@@ -121,6 +121,29 @@
 }
 
 .btn__verCompras-i:hover{
-    background-color: #06090c;
+    background-color: #c4d10c;
     transition: 0.4s;
+}
+
+.btn__limpiarCarro{
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #06090c;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.btn__limpiarCarro:hover{
+    background-color: #3d3d38;
+    transition: 0.4s;
+}
+
+.article__line{
+    border-bottom: 1px solid rgb(112, 99, 99);
+    padding: 0 100px;
 }
