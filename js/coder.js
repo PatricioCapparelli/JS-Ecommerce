@@ -185,7 +185,7 @@ const productos = [
     }
 ];
 
-// Variable para ver guardar productos 
+// Variable para guardar productos 
 let productosEnCarrito = [];
 
 // Agregar los productos al cargar la pagina
@@ -365,6 +365,10 @@ botonComprar.addEventListener('click', () => {
 });
 
 agregarProductos();
+
+let actualizarCarro = function () {
+    
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const botonProductosComprados = document.getElementById('btnProductosComprados');
