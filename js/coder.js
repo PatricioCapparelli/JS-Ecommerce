@@ -366,10 +366,6 @@ botonComprar.addEventListener('click', () => {
 
 agregarProductos();
 
-let actualizarCarro = function () {
-    
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     const botonProductosComprados = document.getElementById('btnProductosComprados');
     const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
