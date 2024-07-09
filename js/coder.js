@@ -436,6 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('DOMContentLoaded', function () {
     const botonVerCompras = document.getElementById('btnVerCompras');
+    botonVerCompras.style.marginBottom = '15px'
     const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
     const swiffySlider = document.querySelector('.swiffy-slider');
     swiffySlider.style.display = 'none'; 
@@ -443,7 +444,6 @@ document.addEventListener('DOMContentLoaded', function () {
     botonVerCompras.addEventListener('click', function () {
 
         const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-        botonVerCompras.style.display = 'none'; 
 
         // Verificar si hay compras guardadas
         if (comprasGuardadas.length === 0) {
@@ -476,8 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-
-        // Construir el HTML para mostrar los productos con su cantidad
+        // innerHTML para mostrar los productos
         for (const key in productosCantidad) {
             if (productosCantidad.hasOwnProperty(key)) {
                 const producto = productosCantidad[key];
