@@ -407,7 +407,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-
         // Construir el HTML para mostrar los productos con su cantidad
         for (const key in productosCantidad) {
             if (productosCantidad.hasOwnProperty(key)) {

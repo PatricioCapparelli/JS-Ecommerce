@@ -117,6 +117,7 @@ transform: translateY(-15px);
     padding: 30px;
     background-color: rgba(0, 0, 0, 0.774);
     display: none;
+    border-radius: 18px;
     
     div{
         display: flex;
@@ -139,13 +140,9 @@ transform: translateY(-15px);
     gap: 10px;
     justify-content: center;
     margin: 40px;
-    margin-left: 500px;
     font-size: 25px;
     background-color: rgb(112, 99, 99);
     align-items: center;
     border-radius: 10px;
 }
 
-#carrito h2{
-    margin-left: 520px;
-}
