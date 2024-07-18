@@ -104,6 +104,55 @@
     padding: 0 100px;
 }
 
+.btn-dark{
+    width: 60px;
+    height: 30px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 100px;
+    border: #333 solid 2px;
+    cursor: pointer;
+    margin: 6px 10px;
+}
+
+.btn-dark::before{
+    content: '';
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: #00A5CE;
+    left: 0;
+    right: unset;
+}
+
+.btn-dark.active::before{
+    right: 0;
+    left: unset;
+}
+
+body.active section{
+    background-color: #313131;
+}
+body.active nav{
+    background-color: #313131;
+}
+body.active #productss{
+    background-color: #313131;
+}
+body.active .d-dark{
+    background-color: #313131;
+}
+body.active .slider-container{
+    background-color: #313131;
+}
+body.active .hero__oferts-title{
+    color: #fff;
+}
+
 // compras
 
 .carrito-btn{

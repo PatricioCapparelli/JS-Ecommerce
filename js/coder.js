@@ -128,6 +128,16 @@ boton.addEventListener('click', () => {
     }
 });
 
+//  boton darkmode
+
+const btnDark = document.querySelector('.btn-dark');
+
+btnDark.addEventListener('click', () => {
+    btnDark.classList.toggle('active');
+    document.body.classList.toggle('active');
+})
+
+
 const productos = [
     {
         id: 1,
