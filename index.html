@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    <title>JS</title>
+</head>
+<body class="container">
+    <header>
+        <div class="head__container">
+            <div class="head__container-pr">
+            <h1 id="titulo">Tienda</h1>
+            <h2 id="subtitulo">JS</h2>
+        </div>
+        <div class="lista">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="./pages/compras.html">Products</a></li>
+                <li><a href="./pages/compras.html">Oferts</a></li>
+                <li><a href="">Contact</a></li>
+                <li class="btn-dark">
+                    <i class="bt btn-sun"></i>
+                    <i class="bt btn-moon"></i>
+                </li>
+            </ul>
+        </div>
+        <a href="./pages/compras.html"><img class="head__container-img" src="./assets/images/carrito-de-compras.png" alt="logo de carrito de compras"></a>
+        </div>
+        
+    </header>
+    <!-- registro -->
+<nav> 
+    <div class="nav__container">
+        <h2>Register</h2>
+            <form id="form_t" class="nav__container-form" method="POST">
+                <input type="text" class="date" placeholder="Name" id="nombre">
+                <input type="text" class="date" placeholder="Lastname" id="apellido">
+                <input type="email" class="date" placeholder="Email" id="email">
+                <input type="number" class="date" placeholder="Age" id="edad">
+                <input type="password" class="date" placeholder="Password" id="contraseña">
+                <button id="btn" type="submit" class="nav__container-btn">Log In</button>
+            </form>
+            <div id="user" class="nav__container-user"></div>
+        </div>
+        <!-- carrito -->
+        <article class="carrito__compra">
+            <div class="carrito__compra-title">
+                <h3>Carrito</h3>
+                <img class="carrito__compra--img" src="./assets/images/cart.png" alt="carrito de compras">
+            </div>
+            <div>
+                <div id="carrito"></div>
+                <div class="carrito__cmp">
+                    <button id="botonComprar" style="display: none;" class="carrito__btn--">Comprar</button>
+                    <div id="total">Total: US$0.00</div>
+                </div>
+                <p id="mensajePagoExitoso" style="display: none;" class="mensaje-pago">Pago realizado con éxito.</p>
+            </div>
+        </article>
+        <article>
+            <button class="btn__verCompras-i" id="btnProductosComprados">Ver compras</button>
+            <div class="article__line"></div>
+            <button id="btnLimpiarCarro" class="btn__limpiarCarro">Limpiar compras</button>
+        </article>
+        <button style="display: none;" id="btnVerCompras">Ver compras</button>
+        <!-- slider -->
+        <div id="slider" class="swiffy-slider slider-nav-animation slider-nav-dark" 
+        style="--swiffy-slider-item-ratio:100/33.3;
+        --swiffy-slider-nav-light:lightcyan;
+        --swiffy-slider-nav-dark:darkolivegreen;
+        --swiffy-slider-nav-zoom:85%;
+        --swiffy-slider-item-reveal:25%;">
+            <ul class="slider-container" id="comprasGuardadasContainer"></ul>
+            <button type="button" class="slider-nav"></button>
+            <button type="button" class="slider-nav slider-nav-next"></button>
+        <div class="slider-indicators">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+</nav>
+    <!-- productos -->
+    <section>
+        <div id="productos" class="c-container"></div>
+    </section>
+    <aside></aside>
+    <footer>
+        <article class="foot__conteiner">
+            <img class="head__container-img " src="./assets/images/carrito-de-compras.png" alt="logo carrito de compras">
+            <article class="foot__conteiner-art">
+                <div>
+                    <h4>About</h4>
+                <ul>
+                    <li>Our why</li>
+                    <li>Our work</li>
+                    <li>Creators</li>
+                </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                <ul>
+                    <li>Suport request</li>
+                    <li>Contact</li>
+                </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                <ul>
+                    <li>Our Story</li>
+                    <li>Shipping & Returns</li>
+                </ul>
+                </div>
+            </article>
+            <article class="foot__conteiner--art">
+                <div>
+                    <h4>Follow <span style="color: yellow;">us</span></h4>
+                    <img src="./assets/images/instagram.png" alt="">
+                    <img src="./assets/images/twitter.png" alt="">
+                    <img src="./assets/images/facebook.png" alt="">
+                </div>
+                <div class="foot__set">
+                    <div id="setTime"></div>
+                    <p>© 2024 Pato. All rights reserved.</p>
+                </div>
+            </article>
+        </article>
+        <div id="productss" style="display: none;"></div>
+    </footer>
+    <script src="./js/coder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+</body>
+</html>
