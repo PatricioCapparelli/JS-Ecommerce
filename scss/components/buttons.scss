@@ -1,0 +1,215 @@
+.lista {
+    ul {
+        display: flex;
+        padding-top: 6px;
+
+        & li a {
+            font-size: 20px;
+            padding: 10px;
+            color: rgb(112, 99, 99);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-optical-sizing: auto;
+        }
+
+        & li a:hover {
+            color: #3185FA;
+        }
+
+    }
+}
+
+.nav__container-btn{
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.nav__container-btn:hover {
+    background-color: #0056b3;
+    transition: 0.4s;
+}
+
+.nav__container-btn:active {
+    transform: scale(0.9);
+}
+
+
+.carrito__btn-- {
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.carrito__btn--:hover {
+    background-color: #044488;
+    transition: .4s;
+}
+.carrito__btn--:active {
+    transform: scale(0.9);
+}
+
+.article__btn{
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 18px;
+    background-color: #06090c;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.article__btn:hover {
+    background-color: #21105c;
+    transition: .4s;
+}
+
+.article__btn:active {
+    transform: scale(0.9);
+}
+
+
+.btn__limpiarCarro{
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #06090c;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.btn__limpiarCarro:hover{
+    background-color: #3d3d38;
+    transition: 0.4s;
+}
+
+.article__line{
+    border-bottom: 1px solid rgb(112, 99, 99);
+    padding: 0 100px;
+}
+
+.btn-dark{
+    width: 60px;
+    height: 30px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 100px;
+    border: #333 solid 2px;
+    cursor: pointer;
+    margin: 6px 10px;
+}
+
+.btn-dark::before{
+    content: '';
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: #00A5CE;
+    left: 0;
+    right: unset;
+}
+
+.btn-dark.active::before{
+    right: 0;
+    left: unset;
+}
+
+body.active section{
+    background-color: #313131;
+}
+body.active nav{
+    background-color: #313131;
+}
+body.active #productss{
+    background-color: #313131;
+}
+body.active .d-dark{
+    background-color: #313131;
+}
+body.active .slider-container{
+    background-color: #313131;
+}
+body.active .hero__oferts-title{
+    color: #fff;
+}
+
+// compras
+
+.carrito-btn{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    margin: auto;
+    padding-bottom: 6px;
+    cursor: pointer;
+}
+
+.carrito-btn:hover{
+    background-color: black;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.btn__verCompras { 
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+    
+
+}
+.btn__verCompras:hover {
+    background-color: #24116b;
+    transition: .4s;
+    box-shadow: #06090c;
+    color: yellow;
+    
+}
+.btn__verCompras:active {
+    transform: scale(0.9);
+}
+
+.btn__verCompras-i{
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #eeff00;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.btn__verCompras-i:hover{
+    background-color: #c4d10c;
+    transition: 0.4s;
+}

@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  max-width: 1600px;
+  height: auto;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 130px 1fr 1fr auto;
+  display: grid;
+  grid-template-areas: "header header header" "nav section section" "nav section section" "nav section section" "footer footer footer";
+}
+
+.c-container {
+  margin-top: 30px;
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  grid-row-gap: 30px;
+  width: 100%;
+  transition: 0.3s;
+  grid-template-areas: "nav block" "nav block" "nav block";
+}
+
+@media (max-width: 1080px) {
+  .container {
+    grid-template-rows: 130px auto 1fr auto;
+    grid-template-areas: "header header header" "section section section" "section section section" "nav nav nav" "footer footer footer";
+  }
+  .c-container {
+    grid-template-areas: "block" "block" "nav" "nav";
+  }
+}
+.hero__container {
+  height: 100vh;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #E7E7E7;
+}
+
+/*# sourceMappingURL=grid.css.map */
