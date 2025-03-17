@@ -1,3 +1,13 @@
+let form = document.querySelector('#form_t');
+let boton = document.getElementById('btn');
+let user = document.querySelector('#user');
+let nombreUsuario = document.getElementById('nombre').value.trim();
+let apellidoUsuario = document.getElementById('apellido').value.trim();
+let edadUsuario = document.getElementById('edad').value.trim();
+let contraseñaUsuario = document.getElementById('contraseña').value;
+let inf_container = null;
+
+
 class Usuario {
     constructor(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario) {
         this.nombreUsuario = nombreUsuario;
@@ -30,16 +40,17 @@ class Usuario {
     }
 }
 
-let form = document.querySelector('#form_t');
-let boton = document.getElementById('btn');
-let user = document.querySelector('#user');
-let inf_container = null;
+function usuarioRegistrado(nombreUsuario, apellidoUsuario) {
+    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // validacion
+    return usuariosGuardados.some(usuario => usuario.nombreUsuario === nombreUsuario && usuario.apellidoUsuario === apellidoUsuario);
+}
+
+
 
 function validarRegistro(e) {
     e.preventDefault();
-
-    let nombreUsuario = document.getElementById('nombre').value.trim();
-    let apellidoUsuario = document.getElementById('apellido').value.trim();
 
     // validacion
     if (usuarioRegistrado(nombreUsuario, apellidoUsuario)) {
@@ -51,9 +62,7 @@ function validarRegistro(e) {
         return;
     }
 
-    let edadUsuario = document.getElementById('edad').value.trim();
-    let contraseñaUsuario = document.getElementById('contraseña').value;
-
+    
     // instancia de usuario con los datos del formulario
     let usuario = new Usuario(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario);
 
@@ -95,12 +104,7 @@ function validarRegistro(e) {
 }
 
 // verificar si el usuario esta registrado
-function usuarioRegistrado(nombreUsuario, apellidoUsuario) {
-    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // validacion
-    return usuariosGuardados.some(usuario => usuario.nombreUsuario === nombreUsuario && usuario.apellidoUsuario === apellidoUsuario);
-}
 
 // guardar usuario en localStorage
 function guardarUsuarioLocalStorage(usuario) {
@@ -137,84 +141,55 @@ btnDark.addEventListener('click', () => {
     document.body.classList.toggle('active');
 })
 
+let productos = [];
 
-const productos = [
-    {
-        id: 1,
-        imagen: "./assets/images/compun1.webp",
-        precio: "US$380",
-        nombre: "Notebook Exo Smart T38 Intel N4020 4gb Ssd128gb Windows 11 Color Gris"
-    },
-    {
-        id: 2,
-        imagen: "./assets/images/ledn1.webp",
-        precio: "US$330",
-        nombre: "Tv Smart Led Philips 32 Hd 32phd6918/77 Google Tv"
-    },
-    {
-        id: 3,
-        imagen: "./assets/images/celun1.webp",
-        precio: "US$400",
-        nombre: "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue"
-    },
-    {
-        id: 4,
-        imagen: "./assets/images/zapan1.webp",
-        precio: "US$199",
-        nombre: "Zapatillas Jaguar Oficial Deportiva Art. #9339 39al45"
-    },
-    {
-        id: 5,
-        imagen: "./assets/images/jbl.webp",
-        precio: "US$90",
-        nombre: "Parlante Jbl Flip 6 Portatil Bluetooth Color Negro"
-    },
-    {
-        id: 6,
-        imagen: "./assets/images/pcn1.webp",
-        precio: "US$530",
-        nombre: "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi"
-    },
-    {
-        id: 7,
-        imagen: "./assets/images/taladron1.webp",
-        precio: "US$180",
-        nombre: "Taladro Atornillador Percutor + 2 Baterias Gp By Lusqtoff"
-    },
-    {
-        id: 8,
-        imagen: "./assets/images/monitorn1.webp",
-        precio: "US$220",
-        nombre: "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo"
-    },
-    {
-        id: 9,
-        imagen: "./assets/images/calefactorn1.webp",
-        precio: "US$110",
-        nombre: "Calefactor Electrico Alta Gama Exahome Con Termostato Ct03"
+async function darProductos() {
+    try {
+        const res = await fetch("./js/data.json");
+        const data = await res.json();
+        
+        productos = data;
+        console.log(productos); 
+
+        agregarProductos();
+    } catch (error) {
+        console.log("Error al cargar los productos:", error);
     }
-];
+}
 
-// Variable para guardar productos 
+darProductos();
+
+// guardar productos en el carrito
 let productosEnCarrito = [];
 
-// Agregar los productos al cargar la pagina
+// Agregar productos al cargar pag
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
+    
+    if (!contenedorProductos) {
+        console.log("El contenedor de productos no se encuentra en el DOM.");
+        return;
+    }
+
+    // Verifica si hay productos para mostrar
+    if (productos.length === 0) {
+        console.log("No hay productos.");
+        return;
+    }
 
     productos.forEach(producto => {
         const articulo = document.createElement('article');
         articulo.classList.add('card-container-min');
 
         // Clases personalizadas
-        if (producto.nombre === "Xiaomi Redmi 10c Dual Sim 128gb 4gb Ram Ocean Blue" ||
-            producto.nombre === "Pc Armada Gamer Amd Ryzen 5 4600g Ram 16gb Radeon Vega Hdmi" ||
-            producto.nombre === "Monitor Gamer 23.8 Aoc G2490vx 144hz Free Sync Display Port Color Negro/Rojo" ||
-            producto.nombre === "Calefactor Electrico Alta Gama Exahome Con Termostato Ct03") {
+        if (producto.id === 3 ||
+            producto.id === 6 ||
+            producto.id === 8 ||
+            producto.id === 9) {
             articulo.classList.add('card__product');
         }
 
-        // Creando elementos dentro de article
+        // Creando elementos dentro del article
         const imagen = document.createElement('img');
         imagen.src = producto.imagen;
         imagen.alt = "imagen del producto";
@@ -223,9 +198,11 @@ function agregarProductos() {
         precio.textContent = producto.precio;
 
         const nombre = document.createElement('p');
+        nombre.classList.add('name-prod');
         nombre.textContent = producto.nombre;
 
         const enlace = document.createElement('a');
+        enlace.classList.add('btn-prod');
         enlace.href = "#carrito";
         enlace.textContent = "🛒";
         enlace.addEventListener('click', () => agregarAlCarrito(producto));
@@ -238,7 +215,7 @@ function agregarProductos() {
         contenedorProductos.appendChild(articulo);
     });
 
-    // Cargar el carrito desde localStorage al cargar la pagina
+    // Cargar el carrito desde localStorage al cargar la página
     cargarCarritoDesdeLocalStorage();
 }
 

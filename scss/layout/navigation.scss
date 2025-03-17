@@ -1,19 +1,18 @@
 nav{
-    padding-top: 26px;
     grid-area: nav;
     background-color: #E7E7E7;
     display: flex;
     flex-direction: column;
-    justify-content: baseline;
     gap: 10px;
     .nav__container{
-        width: auto;
+        margin: 5px;
         background-color: #F5F5F5;
         display: flex;
         flex-direction: column;
         padding: 10px;
         border-radius: 16px;
         align-items: center;
+        gap: 10px;
     }
     form{
         display: flex;

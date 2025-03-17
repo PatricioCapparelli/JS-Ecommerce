@@ -137,11 +137,39 @@
 body.active section{
     background-color: #313131;
 }
+body.active .nav__container-form{
+    background-color: #313131;
+}
+body.active .nav__container{
+    background-color: #313131;
+}
+body.active .show-cart{
+    background-color: #313131;
+}
+body.active .carrito__compra{
+    background-color: #212121;
+}
+body.active .date{
+    background-color: #313131;
+    border-radius: 5px;
+    border: none;
+}
 body.active nav{
     background-color: #313131;
 }
-body.active #productss{
-    background-color: #313131;
+body.active .nav__container{
+    background-color: #212121;
+}
+body.active .card-container-min{
+    background-color: #212121;
+}
+body.active .btn-prod{
+    background-color: #000000;
+    border-radius: 10px;
+}
+body.active .btn-prod:hover{
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 body.active .d-dark{
     background-color: #313131;
