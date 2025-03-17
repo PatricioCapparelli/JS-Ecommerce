@@ -1,10 +1,11 @@
 header {
-  background-image: url("../assets/images/header.jpg");
+  background: linear-gradient(to right, rgb(219, 234, 254), rgb(147, 197, 253), rgb(59, 130, 246));
   background-position: center;
   background-size: cover;
   object-fit: cover;
   grid-area: header;
   align-content: center;
+  transition: 0.4s;
 }
 header h1 {
   font-size: 30px;
@@ -29,6 +30,10 @@ header .head__container-img {
   background-position: center;
   width: 55px;
   height: 55px;
+  transition: 0.3s;
+}
+header .head__container-img:hover {
+  transform: scale(1.2);
 }
 header .head__container-pr {
   display: flex;

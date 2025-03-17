@@ -38,6 +38,7 @@ nav .inf_container {
   font-weight: bold;
 }
 nav article {
+  margin: 5px;
   height: auto;
   width: auto;
   background-color: white;

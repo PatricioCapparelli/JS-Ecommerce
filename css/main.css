@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -144,66 +143,6 @@ a, p, li, h1, h2, h3, h4, h5 {
 .btn-dark.active::before {
   right: 0;
   left: unset;
-}
-
-body.active section {
-  background-color: #313131;
-}
-
-body.active .nav__container-form {
-  background-color: #313131;
-}
-
-body.active .nav__container {
-  background-color: #313131;
-}
-
-body.active .show-cart {
-  background-color: #313131;
-}
-
-body.active .carrito__compra {
-  background-color: #212121;
-}
-
-body.active .date {
-  background-color: #313131;
-  border-radius: 5px;
-  border: none;
-}
-
-body.active nav {
-  background-color: #313131;
-}
-
-body.active .nav__container {
-  background-color: #212121;
-}
-
-body.active .card-container-min {
-  background-color: #212121;
-}
-
-body.active .btn-prod {
-  background-color: #000000;
-  border-radius: 10px;
-}
-
-body.active .btn-prod:hover {
-  background-color: #ffffff;
-  border-radius: 10px;
-}
-
-body.active .d-dark {
-  background-color: #313131;
-}
-
-body.active .slider-container {
-  background-color: #313131;
-}
-
-body.active .hero__oferts-title {
-  color: #fff;
 }
 
 .carrito-btn {
@@ -383,8 +322,13 @@ section {
   height: auto;
 }
 
+.card_product-s img {
+  height: auto;
+  margin-top: 60px;
+}
+
 .card-container-min:hover {
-  transform: translateY(-15px);
+  transform: translateY(-5px);
   box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -488,7 +432,7 @@ section {
 
 footer {
   grid-area: footer;
-  background-image: url("../assets/images/backfoot.jpg");
+  background: linear-gradient(to right, rgb(219, 234, 254), rgb(147, 197, 253), rgb(59, 130, 246));
   background-position: center;
   background-size: cover;
   object-fit: cover;
@@ -714,12 +658,13 @@ footer {
 }
 
 header {
-  background-image: url("../assets/images/header.jpg");
+  background: linear-gradient(to right, rgb(219, 234, 254), rgb(147, 197, 253), rgb(59, 130, 246));
   background-position: center;
   background-size: cover;
   object-fit: cover;
   grid-area: header;
   align-content: center;
+  transition: 0.4s;
 }
 header h1 {
   font-size: 30px;
@@ -744,6 +689,10 @@ header .head__container-img {
   background-position: center;
   width: 55px;
   height: 55px;
+  transition: 0.3s;
+}
+header .head__container-img:hover {
+  transform: scale(1.2);
 }
 header .head__container-pr {
   display: flex;
@@ -799,6 +748,7 @@ nav .inf_container {
   font-weight: bold;
 }
 nav article {
+  margin: 5px;
   height: auto;
   width: auto;
   background-color: white;
@@ -917,6 +867,88 @@ section {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+body.active input:-webkit-autofill,
+body.active input:-webkit-autofill:hover,
+body.active input:-webkit-autofill:focus,
+body.active input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+body.active section {
+  background-color: #313131;
+}
+
+body.active .nav__container-form {
+  background-color: #313131;
+}
+
+body.active .nav__container {
+  background-color: #313131;
+}
+
+body.active .show-cart {
+  background-color: #313131;
+}
+
+body.active .carrito__compra {
+  background-color: #212121;
+}
+
+body.active .date {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.608);
+}
+
+body.active input {
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+}
+
+body.active nav {
+  background-color: #313131;
+}
+
+body.active .nav__container {
+  background-color: #212121;
+}
+
+body.active .card-container-min {
+  background-color: #212121;
+}
+
+body.active .btn-prod {
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+body.active .btn-prod:hover {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+body.active .d-dark {
+  background-color: #313131;
+}
+
+body.active .slider-container {
+  background-color: #313131;
+}
+
+body.active .hero__oferts-title {
+  color: #fff;
+}
+
+body.active header {
+  background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
+}
+
+body.active footer {
+  background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
 }
 
 /*# sourceMappingURL=main.css.map */

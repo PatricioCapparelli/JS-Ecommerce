@@ -1,0 +1,83 @@
+body.active input:-webkit-autofill,
+body.active input:-webkit-autofill:hover,
+body.active input:-webkit-autofill:focus,
+body.active input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+body.active section {
+  background-color: #313131;
+}
+
+body.active .nav__container-form {
+  background-color: #313131;
+}
+
+body.active .nav__container {
+  background-color: #313131;
+}
+
+body.active .show-cart {
+  background-color: #313131;
+}
+
+body.active .carrito__compra {
+  background-color: #212121;
+}
+
+body.active .date {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.608);
+}
+
+body.active input {
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+}
+
+body.active nav {
+  background-color: #313131;
+}
+
+body.active .nav__container {
+  background-color: #212121;
+}
+
+body.active .card-container-min {
+  background-color: #212121;
+}
+
+body.active .btn-prod {
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+body.active .btn-prod:hover {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+body.active .d-dark {
+  background-color: #313131;
+}
+
+body.active .slider-container {
+  background-color: #313131;
+}
+
+body.active .hero__oferts-title {
+  color: #fff;
+}
+
+body.active header {
+  background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
+}
+
+body.active footer {
+  background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
+}
+
+/*# sourceMappingURL=active.css.map */

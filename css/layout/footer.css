@@ -1,6 +1,6 @@
 footer {
   grid-area: footer;
-  background-image: url("../assets/images/backfoot.jpg");
+  background: linear-gradient(to right, rgb(219, 234, 254), rgb(147, 197, 253), rgb(59, 130, 246));
   background-position: center;
   background-size: cover;
   object-fit: cover;

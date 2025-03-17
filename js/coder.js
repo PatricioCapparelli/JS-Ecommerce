@@ -189,6 +189,10 @@ function agregarProductos() {
             articulo.classList.add('card__product');
         }
 
+        if(producto.id === 7){
+            articulo.classList.add('card_product-s')
+        }
+
         // Creando elementos dentro del article
         const imagen = document.createElement('img');
         imagen.src = producto.imagen;
