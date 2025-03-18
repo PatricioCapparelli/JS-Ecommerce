@@ -84,7 +84,6 @@ footer {
 @media (max-width: 600px) {
   .hero__container-head {
     height: 100px;
-    margin-bottom: 40px;
   }
   .hero__container-head h2 {
     display: none;

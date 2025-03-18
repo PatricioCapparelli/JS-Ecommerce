@@ -1,9 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const productss = document.getElementById('productss');
-    const carritoLista = document.getElementById('carrito-lista');
-    const totalElement = document.getElementById('total-price');
-    const botonComprar = document.getElementById('boton-comprar');
-    let productosEnCarritoOfertas = [];
+import timer from "./time.js";
+
+
+const btnDark = document.querySelector('.btn-dark');
+const productss = document.getElementById('productss');
+const carritoLista = document.getElementById('carrito-lista');
+const totalElement = document.getElementById('total-price');
+const botonComprar = document.getElementById('boton-comprar');
+let productosEnCarritoOfertas = [];
+
+timer();
+
+btnDark.addEventListener('click', () => {
+    btnDark.classList.toggle('active');
+    document.body.classList.toggle('active');
+})
 
     // API
     fetch('https://fakestoreapi.com/products')
@@ -36,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Agregar un producto al carrito
-    function agregarAlCarrito(producto) {
+function agregarAlCarrito(producto) {
         const productoExistente = productosEnCarritoOfertas.find(item => item.id === producto.id);
 
         if (productoExistente) {
@@ -99,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
         function cargarProductosDelLocalStorage() {
-//          Cargar productos actuales del carrito
             const productosGuardados = JSON.parse(localStorage.getItem('productosEnCarritoOfertas')) || [];
             productosEnCarritoOfertas = productosGuardados;
             
@@ -129,9 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     cargarProductosDelLocalStorage();
-});
 
-//          Mismo boton de pagina index, pero para mostrar compras de ofertas
 
 document.addEventListener('DOMContentLoaded', function () {
     const botonVerComprass = document.getElementById('btnVerComprass');
@@ -182,15 +188,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const cantidad = productosCantidad[key].cantidad;
                 contenidoHTML += `
                     <li class="slider-it">
-                        <div style="display:flex; flex-direction:row; gap:10px>
-                            <div style="display:flex; flex-direction:column">
-                                <h3 style="color: white;">${producto.title}</h3>
-                                <div style="display:flex; flex-direction:column;">
-                                <p style="color: yellow;">Cantidad: ${cantidad}</p>
-                                <p style="color: yellow;">Precio: $${(producto.price * cantidad).toFixed(2)}</p>
-                                </div>
-                            <img src="${producto.image}" id="imagen-prod"></img>
-                        </div>
+                        <h3 style="color: white;">${producto.title}</h3>
+                        <p style="color: yellow;">Cantidad: ${cantidad}</p>
+                        <p style="color: yellow;">Precio: $${(producto.price * cantidad).toFixed(2)}</p>
+                        <img src="${producto.image}" id="imagen-prod"></img>
                     </li>
                 `;
             }   

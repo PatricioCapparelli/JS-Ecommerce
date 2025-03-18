@@ -23,6 +23,7 @@ header{
         display: flex;
         justify-content: space-around;
         align-content: center;
+        align-items: center;
         height: auto;
         
     }
@@ -46,10 +47,10 @@ header{
 
 // compras
 
-.hero__container-head{
-    height: 100px;
-    margin-bottom: 40px;
-    position: sticky; 
-    top: 0; 
-    z-index: 1000; 
+.head__container-c{
+    height: 130px;
+}
+.head__container-c div{
+    display: flex;
+    justify-content: space-around;
 }

@@ -1,6 +1,5 @@
 section {
-  background-color: #E7E7E7;
-  grid-area: section;
+  background: #E7E7E7;
 }
 
 .compras__guardadas-img {
@@ -10,42 +9,6 @@ section {
   background-position: center;
   background-size: cover;
   margin: 5px;
-}
-
-.slider-items {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 8px;
-  margin: 5px;
-  color: white;
-}
-
-.slider-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 8px;
-  margin: 5px;
-  color: white;
-  padding: 20px;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.slider-it {
-  display: flex;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px;
-  border-radius: 12px;
-  margin: 5px;
-  color: white;
-  padding: 20px;
-  max-width: 500px;
 }
 
 @media (max-width: 600px) {
@@ -59,10 +22,22 @@ section {
     overflow: hidden;
   }
 }
-.hero__oferts-title {
+.hero__oferts {
+  background-color: firebrick;
+  max-width: 1200px;
+  height: 100%;
   display: flex;
-  margin: 40px auto;
+  flex-direction: column;
   justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  padding: 10px;
+}
+
+.hero__oferts-title {
+  margin-top: 10px;
 }
 
 #carrito {

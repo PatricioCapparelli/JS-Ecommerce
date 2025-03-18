@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet"
+        crossorigin="anonymous">
     <title>ComprasJS</title>
 </head>
+
 <body class="hero__container">
-    <header class="hero__container-head">
-        <div class="head__container">
+    <header class="head__container-c">
+        <div>
             <div class="head__container-pr">
-            <h1 id="titulo">Tienda</h1>
-            <h2 id="subtitulo">JS</h2>
+                <h1 id="titulo">Tienda</h1>
+                <h2 id="subtitulo">JS</h2>
             </div>
             <div class="lista">
                 <ul>
@@ -26,20 +29,14 @@
                     </li>
                 </ul>
             </div>
-            <a href="../index.html"><img class="head__container-img" src="../assets/images/carrito-de-compras.png" alt="logo de carrito de compras"></a>
+            <a href="../index.html"><img class="head__container-img" src="../assets/images/carrito-de-compras.png"
+                    alt="logo de carrito de compras"></a>
         </div>
     </header>
-    <nav style="display: none;"> 
+    <nav style="display: none;">
         <div style="display: none;">
             <h2>Registrate</h2>
-            <form action="" id="form_t" class="nav__container-form">
-                <input type="text" class="date" placeholder="Nombre" id="nombre">
-                <input type="text" class="date" placeholder="Apellido" id="apellido">
-                <input type="email" class="date" placeholder="Email" id="email">
-                <input type="number" class="date" placeholder="Edad" id="edad">
-                <input type="password" class="date" placeholder="Clave" id="contraseña">
-                <button id="btn" type="submit" class="nav__container-btn">Log In</button>
-            </form>
+
             <div id="user" class="nav__container-user"></div>
         </div>
         <!-- carrito -->
@@ -66,66 +63,67 @@
         </div>
     </section>
     <div class="d-dark" style="display: flex;">
-        <button class="btn__verCompras" id="btnVerCompras">Ver compras</button>
         <button class="btn__verCompras" id="btnVerComprass">Compras de Ofertas</button>
     </div>
-<div class="swiffy-slider slider-item-show2 slider-item-reveal slider-nav-dark" 
-    style="--swiffy-slider-item-ratio:100/33.3;
+    <div class="swiffy-slider slider-item-show2 slider-item-reveal slider-nav-dark" style="--swiffy-slider-item-ratio:100/33.3;
     --swiffy-slider-nav-light:lightcyan;
     --swiffy-slider-nav-dark:darkolivegreen;
     --swiffy-slider-nav-zoom:85%;
-    --swiffy-slider-item-reveal:25%;">
-    <ul class="slider-container" id="comprasGuardadasContainer">
-    </ul>
-    <button type="button" class="slider-nav"></button>
-    <button type="button" class="slider-nav slider-nav-next"></button>
-    <div class="slider-indicators">
-        <button class="active"></button>
-        <button></button>
-        <button></button>
-    </div>
-</div>
-<section class="hero__oferts">
-    <h2 class="hero__oferts-title">Nuestras Ofertas</h2>
-<!-- carrito -->
-    <div id="lista-carrito"></div>
-    <div id="btnLimpiarCarro"></div>
-    <div id="btnProductosComprados"></div>
-    <article id="productss" class="apis-article"></article>
-    <div id="carrito">
-        <h2 class="carrito-title">Carrito de Compras🛒</h2>
-        <div id="carrito-lista"></div>
-        <div class="carrito__div">
-            <div id="total-price">Total: $0.00</div>
-            <button  class="carrito__btn--" id="boton-comprar" style="display: none;">Comprar</button>
+    --swiffy-slider-item-reveal:25%;
+    max-width: 1200px;
+    margin: 0 auto;">
+        <ul class="slider-container" id="comprasGuardadasContainer">
+        </ul>
+        <button type="button" class="slider-nav"></button>
+        <button type="button" class="slider-nav slider-nav-next"></button>
+        <div class="slider-indicators">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
         </div>
     </div>
-</section>
+    <section class="hero__oferts">
+        <h2 class="hero__oferts-title">Nuestras Ofertas</h2>
+        <!-- carrito -->
+        <div id="lista-carrito"></div>
+        <div id="btnLimpiarCarro"></div>
+        <div id="btnProductosComprados"></div>
+        <article id="productss" class="apis-article"></article>
+        <div id="carrito">
+            <h2 class="carrito-title">Carrito de Compras🛒</h2>
+            <div id="carrito-lista"></div>
+            <div class="carrito__div">
+                <div id="total-price">Total: $0.00</div>
+                <button class="carrito__btn--" id="boton-comprar" style="display: none;">Comprar</button>
+            </div>
+        </div>
+    </section>
     <footer>
         <article class="foot__conteiner">
-            <img class="head__container-img " src="../assets/images/carrito-de-compras.png" alt="logo carrito de compras">
+            <img class="head__container-img " src="../assets/images/carrito-de-compras.png"
+                alt="logo carrito de compras">
             <article class="foot__conteiner-art">
                 <div>
                     <h4>About</h4>
-                <ul>
-                    <li>Our why</li>
-                    <li>Our work</li>
-                    <li>Creators</li>
-                </ul>
+                    <ul>
+                        <li>Our why</li>
+                        <li>Our work</li>
+                        <li>Creators</li>
+                    </ul>
                 </div>
                 <div>
                     <h4>Support</h4>
-                <ul>
-                    <li>Suport request</li>
-                    <li>Contact</li>
-                </ul>
+                    <ul>
+                        <li>Suport request</li>
+                        <li>Contact</li>
+                    </ul>
                 </div>
                 <div>
                     <h4>Company</h4>
-                <ul>
-                    <li>Our Story</li>
-                    <li>Shipping & Returns</li>
-                </ul>
+                    <ul>
+                        <li>Our Story</li>
+                        <li>Shipping & Returns</li>
+                    </ul>
                 </div>
             </article>
             <article class="foot__conteiner--art">
@@ -142,9 +140,10 @@
             </article>
         </article>
     </footer>
-<script src="../js/api.js"></script>
-<script src="../js/coder.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+    <script type="module" src="../js/api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
+        defer></script>
 </body>
+
 </html>

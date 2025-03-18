@@ -1,3 +1,5 @@
+import timer from "./time.js"
+
 let form = document.querySelector('#form_t');
 let boton = document.getElementById('btn');
 let user = document.querySelector('#user');
@@ -7,6 +9,7 @@ let edadUsuario = document.getElementById('edad').value.trim();
 let contraseñaUsuario = document.getElementById('contraseña').value;
 let inf_container = null;
 
+timer();
 
 class Usuario {
     constructor(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario) {
@@ -62,7 +65,6 @@ function validarRegistro(e) {
         return;
     }
 
-    
     // instancia de usuario con los datos del formulario
     let usuario = new Usuario(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario);
 
@@ -103,8 +105,6 @@ function validarRegistro(e) {
     }
 }
 
-// verificar si el usuario esta registrado
-
 
 // guardar usuario en localStorage
 function guardarUsuarioLocalStorage(usuario) {
@@ -133,7 +133,6 @@ boton.addEventListener('click', () => {
 });
 
 //  boton darkmode
-
 const btnDark = document.querySelector('.btn-dark');
 
 btnDark.addEventListener('click', () => {
@@ -421,88 +420,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-        // boton de page 'compras'
-
-    document.addEventListener('DOMContentLoaded', function () {
-    const botonVerCompras = document.getElementById('btnVerCompras');
-    botonVerCompras.style.marginBottom = '15px'
-    const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
-    const swiffySlider = document.querySelector('.swiffy-slider');
-    swiffySlider.style.display = 'none'; 
-
-    botonVerCompras.addEventListener('click', function () {
-
-        const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
-
-        // Verificar si hay compras guardadas
-        if (comprasGuardadas.length === 0) {
-            Swal.fire({
-                title: 'VACIO!',
-                text: 'No hiciste ninguna compra!',
-                icon: 'info',
-                confirmButtonText: 'Confirmar'
-            })
-            return; 
-        }
-
-        let contenidoHTML = '';
-        // Objeto para contar la cantidad de cada producto
-        const productosCantidad = {};
-
-        // Iterar sobre las compras guardadas para contar la cantidad de cada producto
-        comprasGuardadas.forEach(compra => {
-            compra.productos.forEach(item => {
-                const idProducto = item.id;
-                if (productosCantidad[idProducto]) {
-                    productosCantidad[idProducto].cantidad++;
-                } else {
-                    productosCantidad[idProducto] = {
-                        id: idProducto,
-                        producto: item.producto,
-                        cantidad: 1
-                    };
-                }
-            });
-        });
-
-        // innerHTML para mostrar los productos
-        for (const key in productosCantidad) {
-            if (productosCantidad.hasOwnProperty(key)) {
-                const producto = productosCantidad[key];
-                contenidoHTML += `
-                    <li class="slider-item">
-                        <h3 style="color: white;">${producto.producto.nombre}</h3>
-                        <p style="color: yellow;">Cantidad: ${producto.cantidad}</p>
-                        <p style="color: yellow;">Precio: ${producto.producto.precio}</p>
-                    </li>
-                `;
-            }
-        }
-        
-        // Insertar el HTML en el contenedor del carrusel
-        comprasGuardadasContainer.innerHTML = contenidoHTML;
-
-        // Mostrar el carrusel solo si hay productos
-        if (comprasGuardadas.length > 0) {
-            swiffySlider.style.display = 'block';
-        }
-    });
-});
-
-// reloj
-
-let setTime = document.getElementById('setTime');
-
-function updateTime() {
-    const time = document.createElement('div');
-    const date = new Date();
-    time.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    setTime.innerHTML = '';
-    setTime.appendChild(time);
-    setTimeout(updateTime, 1000);
-}
-updateTime();
 
 // btn limpiar carrito
 

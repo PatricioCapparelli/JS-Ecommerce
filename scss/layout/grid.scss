@@ -4,7 +4,7 @@
     height: auto;
 
     grid-template-columns: 20% auto;
-    grid-template-rows: 130px 1fr 1fr auto;
+    grid-template-rows: 130px 1fr auto;
     display: grid;
 
     grid-template-areas: 
@@ -16,6 +16,7 @@
 }
 
 .c-container{
+    background: #E7E7E7 ;
     margin-top: 30px;
     display: grid;
     padding: 10px;
@@ -55,15 +56,4 @@
             "nav"
             ;
     }
-}
-
-// compras
-
-.hero__container{
-    height: 100vh;
-    background-size: cover;
-    object-fit: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #E7E7E7;
 }

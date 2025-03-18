@@ -24,6 +24,7 @@ header .head__container {
   display: flex;
   justify-content: space-around;
   align-content: center;
+  align-items: center;
   height: auto;
 }
 header .head__container-img {
@@ -42,12 +43,13 @@ header .head__container-pr {
   justify-content: center;
 }
 
-.hero__container-head {
-  height: 100px;
-  margin-bottom: 40px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.head__container-c {
+  height: 130px;
+}
+
+.head__container-c div {
+  display: flex;
+  justify-content: space-around;
 }
 
 /*# sourceMappingURL=header.css.map */

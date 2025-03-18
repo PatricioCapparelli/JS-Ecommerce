@@ -2,25 +2,56 @@
     ul {
         display: flex;
         padding-top: 6px;
+        justify-content: center;
+        align-items: center;
 
-        & li a {
-            font-size: 20px;
-            padding: 10px;
-            color: rgb(112, 99, 99);
-            cursor: pointer;
-            transition: all 0.3s ease;
+        a {
+            --color: #0077ff;
+            font-family: inherit;
             display: inline-block;
-            font-optical-sizing: auto;
+            width: 6em;
+            height: 2.6em;
+            line-height: 2.5em;
+            overflow: hidden;
+            cursor: pointer;
+            margin: 20px;
+            font-size: 17px;
+            z-index: 1;
+            color: var(--color);
+            border: 2px solid var(--color);
+            border-radius: 6px;
+            position: relative;
+            text-align: center;
         }
-
-        & li a:hover {
-            color: #3185FA;
+        
+        a::before {
+            position: absolute;
+            content: "";
+            background: var(--color);
+            width: 150px;
+            height: 200px;
+            z-index: -1;
+            border-radius: 50%;
         }
-
+        
+        a:hover {
+            color: white;
+        }
+        
+        a:before {
+            top: 100%;
+            left: 100%;
+            transition: 0.7s all;
+        }
+        
+        a:hover::before {
+            top: -30px;
+            left: -30px;
+        }
     }
 }
 
-.nav__container-btn{
+.nav__container-btn {
     border: none;
     color: white;
     padding: 10px 25px;
@@ -56,11 +87,12 @@
     background-color: #044488;
     transition: .4s;
 }
+
 .carrito__btn--:active {
     transform: scale(0.9);
 }
 
-.article__btn{
+.article__btn {
     border: none;
     color: white;
     padding: 10px 20px;
@@ -81,7 +113,7 @@
 }
 
 
-.btn__limpiarCarro{
+.btn__limpiarCarro {
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -94,17 +126,17 @@
     margin-top: 10px;
 }
 
-.btn__limpiarCarro:hover{
+.btn__limpiarCarro:hover {
     background-color: #3d3d38;
     transition: 0.4s;
 }
 
-.article__line{
+.article__line {
     border-bottom: 1px solid rgb(112, 99, 99);
     padding: 0 100px;
 }
 
-.btn-dark{
+.btn-dark {
     width: 60px;
     height: 30px;
     padding: 0 5px;
@@ -118,7 +150,7 @@
     margin: 6px 10px;
 }
 
-.btn-dark::before{
+.btn-dark::before {
     content: '';
     position: absolute;
     height: 25px;
@@ -129,7 +161,7 @@
     right: unset;
 }
 
-.btn-dark.active::before{
+.btn-dark.active::before {
     right: 0;
     left: unset;
 }
@@ -137,7 +169,7 @@
 
 // compras
 
-.carrito-btn{
+.carrito-btn {
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -147,16 +179,16 @@
     cursor: pointer;
 }
 
-.carrito-btn:hover{
+.carrito-btn:hover {
     background-color: black;
     border-radius: 10px;
     transition: 0.4s;
 }
 
-.btn__verCompras { 
+.btn__verCompras {
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #007bff; 
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -164,21 +196,23 @@
     display: flex;
     margin: 0 auto;
     margin-top: 10px;
-    
+
 
 }
+
 .btn__verCompras:hover {
     background-color: #24116b;
     transition: .4s;
     box-shadow: #06090c;
     color: yellow;
-    
+
 }
+
 .btn__verCompras:active {
     transform: scale(0.9);
 }
 
-.btn__verCompras-i{
+.btn__verCompras-i {
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -191,7 +225,13 @@
     margin-top: 10px;
 }
 
-.btn__verCompras-i:hover{
+.btn__verCompras-i:hover {
     background-color: #c4d10c;
     transition: 0.4s;
+}
+
+.name-prod {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
