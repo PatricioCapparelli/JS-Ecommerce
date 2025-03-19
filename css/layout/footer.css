@@ -4,11 +4,12 @@ footer {
   background-position: center;
   background-size: cover;
   object-fit: cover;
+  margin-bottom: 0;
 }
 
 .foot__conteiner {
   padding: 50px;
-  margin: 10px;
+  margin-top: 10px;
   max-width: 1229px;
   width: 100%;
   display: flex;

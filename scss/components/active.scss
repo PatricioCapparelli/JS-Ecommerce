@@ -71,6 +71,10 @@ body.active header{
     background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))
 }
 body.active footer{
-    background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))
+    background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
+    color: white;
+}
+body.active .foot_set-p{
+    color: white;
 }
 

@@ -240,6 +240,7 @@ a, p, li, h1, h2, h3, h4, h5 {
 
 section {
   background: #E7E7E7;
+  grid-area: section;
 }
 
 .compras__guardadas-img {
@@ -252,9 +253,42 @@ section {
 }
 
 @media (max-width: 600px) {
+  .container {
+    width: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+    display: grid;
+    grid-template-areas: "header" "nav" "section" "section" "section" "footer";
+  }
+  .container .c-container {
+    background: #E7E7E7;
+    margin-top: 30px;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    grid-row-gap: 30px;
+    width: 100%;
+    transition: 0.3s;
+    grid-template-areas: "block" "block" "block";
+  }
+  .container header .head__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .container header .head__container ul {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
   .slider-it {
     display: inline-block;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
@@ -263,7 +297,6 @@ section {
   }
 }
 .hero__oferts {
-  background-color: firebrick;
   max-width: 1200px;
   height: 100%;
   display: flex;
@@ -427,15 +460,13 @@ section {
 }
 
 .carrito__div {
-  padding: 30px;
+  padding: 20px;
   display: flex;
-  width: 260px;
-  height: 100px;
   gap: 10px;
   justify-content: center;
   margin: 40px;
-  font-size: 25px;
-  background-color: rgb(112, 99, 99);
+  font-size: 22px;
+  background-color: rgba(112, 99, 99, 0.307);
   align-items: center;
   border-radius: 10px;
 }
@@ -446,11 +477,12 @@ footer {
   background-position: center;
   background-size: cover;
   object-fit: cover;
+  margin-bottom: 0;
 }
 
 .foot__conteiner {
   padding: 50px;
-  margin: 10px;
+  margin-top: 10px;
   max-width: 1229px;
   width: 100%;
   display: flex;
@@ -649,15 +681,19 @@ footer {
   grid-template-areas: "nav block" "nav block" "nav block";
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .container {
-    grid-template-rows: 130px auto 1fr auto;
-    grid-template-areas: "header header header" "section section section" "section section section" "nav nav nav" "footer footer footer";
-  }
-  .c-container {
-    grid-template-areas: "block" "block" "nav" "nav";
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr 1fr));
+    grid-template-areas: "header header" "section section" "section section" "nav nav" "footer footer";
   }
 }
+.hero__container {
+  background-color: #E7E7E7;
+}
+
 header {
   background: linear-gradient(to right, rgb(219, 234, 254), rgb(147, 197, 253), rgb(59, 130, 246));
   background-position: center;
@@ -710,6 +746,7 @@ header .head__container-pr {
 .head__container-c div {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 nav {
@@ -800,6 +837,7 @@ nav .carrito__cmp {
 
 section {
   background: #E7E7E7;
+  grid-area: section;
 }
 
 .compras__guardadas-img {
@@ -812,9 +850,42 @@ section {
 }
 
 @media (max-width: 600px) {
+  .container {
+    width: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+    display: grid;
+    grid-template-areas: "header" "nav" "section" "section" "section" "footer";
+  }
+  .container .c-container {
+    background: #E7E7E7;
+    margin-top: 30px;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 30px;
+    grid-row-gap: 30px;
+    width: 100%;
+    transition: 0.3s;
+    grid-template-areas: "block" "block" "block";
+  }
+  .container header .head__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .container header .head__container ul {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
   .slider-it {
     display: inline-block;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
@@ -823,7 +894,6 @@ section {
   }
 }
 .hero__oferts {
-  background-color: firebrick;
   max-width: 1200px;
   height: 100%;
   display: flex;
@@ -939,6 +1009,11 @@ body.active header {
 
 body.active footer {
   background: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
+  color: white;
+}
+
+body.active .foot_set-p {
+  color: white;
 }
 
 .slider-it {

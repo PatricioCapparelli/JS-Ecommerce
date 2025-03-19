@@ -50,6 +50,7 @@ header .head__container-pr {
 .head__container-c div {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 /*# sourceMappingURL=header.css.map */
