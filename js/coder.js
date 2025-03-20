@@ -1,4 +1,5 @@
 import timer from "./time.js"
+import cleanShop from "./clean.js";
 
 let form = document.querySelector('#form_t');
 let boton = document.getElementById('btn');
@@ -7,9 +8,11 @@ let nombreUsuario = document.getElementById('nombre').value.trim();
 let apellidoUsuario = document.getElementById('apellido').value.trim();
 let edadUsuario = document.getElementById('edad').value.trim();
 let contraseñaUsuario = document.getElementById('contraseña').value;
+let btnLimpiarCarro = document.getElementById("btnLimpiarCarro")
 let inf_container = null;
 
 timer();
+cleanShop(btnLimpiarCarro);
 
 class Usuario {
     constructor(nombreUsuario, apellidoUsuario, edadUsuario, contraseñaUsuario) {
@@ -146,9 +149,9 @@ async function darProductos() {
     try {
         const res = await fetch("./js/data.json");
         const data = await res.json();
-        
+
         productos = data;
-        console.log(productos); 
+        console.log(productos);
 
         agregarProductos();
     } catch (error) {
@@ -164,7 +167,7 @@ let productosEnCarrito = [];
 // Agregar productos al cargar pag
 function agregarProductos() {
     const contenedorProductos = document.getElementById('productos');
-    
+
     if (!contenedorProductos) {
         console.log("El contenedor de productos no se encuentra en el DOM.");
         return;
@@ -188,7 +191,7 @@ function agregarProductos() {
             articulo.classList.add('card__product');
         }
 
-        if(producto.id === 7){
+        if (producto.id === 7) {
             articulo.classList.add('card_product-s')
         }
 
@@ -356,95 +359,69 @@ botonComprar.addEventListener('click', () => {
 
 agregarProductos();
 
-document.addEventListener('DOMContentLoaded', function () {
-    const botonProductosComprados = document.getElementById('btnProductosComprados');
-    const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
-    const swiffySlider = document.querySelector('.swiffy-slider');
-    swiffySlider.style.display = 'none'; // ocultar el carrusel
+const botonProductosComprados = document.getElementById('btnProductosComprados');
+const comprasGuardadasContainer = document.getElementById('comprasGuardadasContainer');
+const swiffySlider = document.querySelector('.swiffy-slider');
+swiffySlider.style.display = 'none'; // ocultar el carrusel
 
-    botonProductosComprados.addEventListener('click', function () {
-        
-        const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
+botonProductosComprados.addEventListener('click', function () {
 
-        // Verificar si hay compras guardadas
-        if (comprasGuardadas.length === 0) {
-            Swal.fire({
-                title: 'VACIO!',
-                text: 'No hiciste ninguna compra!',
-                icon: 'info',
-                confirmButtonText: 'Confirmar'
-            })
-            return; 
-        }
+    const comprasGuardadas = JSON.parse(localStorage.getItem('comprasGuardadas')) || [];
 
-        let contenidoHTML = '';
-        // Objeto para contar la cantidad de cada producto
-        const productosCantidad = {};
+    // Verificar si hay compras guardadas
+    if (comprasGuardadas.length === 0) {
+        Swal.fire({
+            title: 'VACIO!',
+            text: 'No hiciste ninguna compra!',
+            icon: 'info',
+            confirmButtonText: 'Confirmar'
+        })
+        return;
+    }
 
-        // Iterar sobre las compras guardadas para contar la cantidad de cada producto
-        comprasGuardadas.forEach(compra => {
-            compra.productos.forEach(item => {
-                const idProducto = item.id;
-                if (productosCantidad[idProducto]) {
-                    productosCantidad[idProducto].cantidad++;
-                } else {
-                    productosCantidad[idProducto] = {
-                        id: idProducto,
-                        producto: item.producto,
-                        cantidad: 1
-                    };
-                }
-            });
+    let contenidoHTML = '';
+    // Objeto para contar la cantidad de cada producto
+    const productosCantidad = {};
+
+    // Iterar sobre las compras guardadas para contar la cantidad de cada producto
+    comprasGuardadas.forEach(compra => {
+        compra.productos.forEach(item => {
+            const idProducto = item.id;
+            if (productosCantidad[idProducto]) {
+                productosCantidad[idProducto].cantidad++;
+            } else {
+                productosCantidad[idProducto] = {
+                    id: idProducto,
+                    producto: item.producto,
+                    cantidad: 1
+                };
+            }
         });
+    });
 
-        // Construir el HTML para mostrar los productos con su cantidad
-        for (const key in productosCantidad) {
-            if (productosCantidad.hasOwnProperty(key)) {
-                const producto = productosCantidad[key];
-                contenidoHTML += `
+    // Construir el HTML para mostrar los productos con su cantidad
+    for (const key in productosCantidad) {
+        if (productosCantidad.hasOwnProperty(key)) {
+            const producto = productosCantidad[key];
+            contenidoHTML += `
                     <li class="slider-items">
-                        <h3 style="color: white;">${producto.producto.nombre}</h3>
+                        <h3 style="color: black;">${producto.producto.nombre}</h3>
                         <img class="compras__guardadas-img" src="${producto.producto.imagen}" alt="${producto.producto.nombre}">
                         <p style="color: yellow;">Cantidad: ${producto.cantidad}</p>
                         <p style="color: yellow;">Precio: ${producto.producto.precio}</p>
                     </li>
                 `;
-            }
         }
+    }
 
-        comprasGuardadasContainer.innerHTML = contenidoHTML;
+    comprasGuardadasContainer.innerHTML = contenidoHTML;
 
-        // Mostrar el carrusel si hay productos
-        if (comprasGuardadas.length > 0) {
-            swiffySlider.style.display = 'block';
-        }
-    });
-});
-
-// btn limpiar carrito
-
-let btnLimpiarCarro = document.getElementById('btnLimpiarCarro');
-
-btnLimpiarCarro.addEventListener('click', () => {
-
-    let comprasGuardadas = localStorage.getItem('comprasGuardadas');
-    
-    if (comprasGuardadas) {
-        localStorage.removeItem('comprasGuardadas');
-        console.log('Se han eliminado las compras guardadas.');
-        comprasGuardadasContainer.innerHTML = ''
-        const slider = document.getElementById('slider');
-        slider.style.display = 'none'
-    } else {
-        Toastify({
-            text: "No hiciste ninguna compra, o limpiaste las anteriores",
-            style: {
-                background: 'yellow',
-                color: 'black'
-            },
-            position: 'left',
-            duration: 3000
-        }).showToast();
+    // Mostrar el carrusel si hay productos
+    if (comprasGuardadas.length > 0) {
+        swiffySlider.style.display = 'block';
     }
 });
+
+
+// btn limpiar carrito
 
